@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Phil Tech Proj X Parody</title>
+<title>𝕏 — PhilosopherTweets</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
@@ -192,8 +192,9 @@
   .tweet-media.media-3 { grid-template-columns: 1fr 1fr; }
   .tweet-media.media-4 { grid-template-columns: 1fr 1fr; }
   .tweet-media .media-item { overflow: hidden; position: relative; background: var(--surface); cursor: pointer; }
-  .tweet-media.media-1 .media-item { height: 400px; }
-  .tweet-media.media-2 .media-item { height: 280px; }
+  .tweet-media.media-1 .media-item { max-height: 300px; height: auto; }
+  .tweet-media .media-item img { object-fit: contain; }
+  .tweet-media.media-2 .media-item { height: 180px; }
   .tweet-media.media-3 .media-item:first-child { height: 280px; grid-row: span 2; }
   .tweet-media.media-3 .media-item:not(:first-child) { height: 139px; }
   .tweet-media.media-4 .media-item { height: 175px; }
@@ -565,7 +566,7 @@ function buildThread() {
       ['312', '5.5K', '22.0K', '90K'],
       {media: [{
         type: 'image', 
-        src: ''}]
+        src: './postman-clock-img.png'}]
       })
     }
 
