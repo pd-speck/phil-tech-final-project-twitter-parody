@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>𝕏 — PhilosopherTweets</title>
+<title>Phil Tech X Parody</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
@@ -418,7 +418,7 @@ function mediaGrid(media) {
         <img src="${m.src}" alt="">
         <div class="media-gif-badge">GIF</div>
       </div>`;
-    return `<div class="media-item"><img src="${m.src}" alt="${m.alt ?? ''}"></div>`;
+    return `<div class="media-item"><img src="${m.src}" style="${m.style ?? ''}" alt="${m.alt ?? ''}"></div>`;
   }).join('');
   return `<div class="tweet-media media-${count}">${items}</div>`;
 }
