@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>𝕏 — PhilosopherTweets</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #000;
+    --surface: #16181c;
+    --surface2: #1e2127;
+    --border: #2f3336;
+    --text: #e7e9ea;
+    --muted: #71767b;
+    --accent: #1d9bf0;
+    --accent-hover: #1a8cd8;
+    --green: #00ba7c;
+    --pink: #f91880;
+    --kant-color: #9b59b6;
+    --marx-color: #c0392b;
+    --rousseau-color: #27ae60;
+    --heidegger-color: #7f8c8d;
+    --postman-color: #e67e22;
+    --marcuse-color: #2980b9;
+    --nav-w: 275px;
+    --sidebar-w: 350px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: 'DM Sans', sans-serif; min-height: 100vh; }
+
+  /* LAYOUT */
+  .app { display: flex; justify-content: center; max-width: 1265px; margin: 0 auto; }
+  .left-nav { width: var(--nav-w); padding: 0 12px; position: sticky; top: 0; height: 100vh; display: flex; flex-direction: column; border-right: 1px solid var(--border); }
+  .feed { width: 600px; border-right: 1px solid var(--border); min-height: 100vh; }
+  .right-sidebar { width: var(--sidebar-w); padding: 0 16px; position: sticky; top: 0; height: 100vh; overflow-y: auto; }
+
+  /* LEFT NAV */
+  .nav-logo { padding: 12px 16px; margin-bottom: 4px; cursor: pointer; }
+  .nav-logo svg { width: 30px; height: 30px; fill: var(--text); }
+  .nav-item { display: flex; align-items: center; gap: 20px; padding: 12px 16px; border-radius: 9999px; cursor: pointer; font-size: 20px; transition: background 0.15s; margin-bottom: 2px; }
+  .nav-item:hover { background: rgba(255,255,255,0.1); }
+  .nav-item svg { width: 26px; height: 26px; fill: var(--text); }
+  .nav-item span { font-size: 19px; }
+  .nav-profile { display: flex; align-items: center; gap: 12px; padding: 12px; border-radius: 9999px; cursor: pointer; margin-top: auto; margin-bottom: 12px; transition: background 0.15s; }
+  .nav-profile:hover { background: rgba(255,255,255,0.1); }
+  .nav-profile-info .name { font-weight: 600; font-size: 15px; }
+  .nav-profile-info .handle { color: var(--muted); font-size: 14px; }
+  .post-btn { background: var(--accent); color: #fff; border: none; border-radius: 9999px; padding: 16px; width: 100%; font-size: 17px; font-weight: 700; cursor: pointer; margin-bottom: 8px; transition: background 0.15s; }
+  .post-btn:hover { background: var(--accent-hover); }
+
+  /* FEED HEADER */
+  .feed-header { position: sticky; top: 0; background: rgba(0,0,0,0.75); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); z-index: 10; }
+  .feed-header-inner { padding: 15px 16px; display: flex; align-items: center; gap: 16px; }
+  .feed-header h2 { font-size: 20px; font-weight: 700; }
+  .back-btn { width: 34px; height: 34px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: background 0.15s; }
+  .back-btn:hover { background: rgba(255,255,255,0.1); }
+  .back-btn svg { width: 18px; height: 18px; fill: var(--text); }
+
+  /* AVATAR */
+  .av { width: 48px; height: 48px; border-radius: 50%; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 22px; cursor: pointer; transition: opacity 0.15s; overflow: hidden; }
+  .av:hover { opacity: 0.85; }
+  .av.sm { width: 36px; height: 36px; font-size: 16px; }
+  .av img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
+  .av.kant { background: #4a235a; }
+  .av.marx { background: #4a0f0f; }
+  .av.rousseau { background: #0f3a1f; }
+  .av.heidegger { background: #2c3e50; }
+  .av.postman { background: #6e2c00; }
+  .av.marcuse { background: #0a2744; }
+
+  /* TWEET */
+  .tweet { border-bottom: 1px solid var(--border); padding: 12px 16px; cursor: pointer; transition: background 0.1s; }
+  .tweet:hover { background: rgba(255,255,255,0.03); }
+  .tweet-main { display: flex; gap: 12px; }
+  .tweet-body { flex: 1; min-width: 0; }
+  .tweet-header { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; margin-bottom: 2px; }
+  .tweet-name { font-weight: 700; font-size: 15px; cursor: pointer; }
+  .tweet-name:hover { text-decoration: underline; }
+  .tweet-handle, .tweet-dot, .tweet-time { color: var(--muted); font-size: 15px; }
+  .tweet-text { font-size: 15px; line-height: 1.55; margin-bottom: 12px; white-space: pre-wrap; }
+  .tweet-text a { color: var(--accent); text-decoration: none; }
+  .tweet-text a:hover { text-decoration: underline; }
+  .tweet-image { width: 100%; border-radius: 16px; margin-top: 10px; max-height: 400px; object-fit: cover; display: block; }
+  .replying-to { font-size: 14px; color: var(--muted); margin-bottom: 4px; }
+  .replying-to a { color: var(--accent); cursor: pointer; }
+
+  /* TWEET ACTIONS */
+  .tweet-actions { display: flex; margin-top: 4px; }
+  .action-btn { display: flex; align-items: center; gap: 6px; color: var(--muted); font-size: 13px; cursor: pointer; padding: 6px 10px 6px 0; border-radius: 9999px; transition: color 0.15s; flex: 1; }
+  .action-btn:hover { color: var(--accent); }
+  .action-btn.like:hover { color: var(--pink); }
+  .action-btn.retweet:hover { color: var(--green); }
+  .action-btn svg { width: 18px; height: 18px; fill: currentColor; }
+  @keyframes likeAnim { 0%{transform:scale(1)} 50%{transform:scale(1.4)} 100%{transform:scale(1)} }
+  .liked { color: var(--pink) !important; animation: likeAnim 0.3s ease; }
+  .retweeted { color: var(--green) !important; }
+
+  /* OP TWEET */
+  .tweet.op .tweet-time-full { font-size: 15px; color: var(--muted); margin: 16px 0; padding-top: 16px; border-top: 1px solid var(--border); }
+  .tweet.op .tweet-stats { display: flex; gap: 20px; padding: 12px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); margin-bottom: 4px; }
+  .tweet.op .stat strong { font-weight: 700; }
+  .tweet.op .stat span { color: var(--muted); }
+
+  /* VERIFIED */
+  .verified { display: inline-flex; align-items: center; }
+  .verified svg { width: 16px; height: 16px; }
+  .kant-v svg { fill: var(--kant-color); }
+  .marx-v svg { fill: var(--marx-color); }
+  .rousseau-v svg { fill: var(--rousseau-color); }
+  .heidegger-v svg { fill: var(--heidegger-color); }
+  .postman-v svg { fill: var(--postman-color); }
+  .marcuse-v svg { fill: var(--marcuse-color); }
+
+  /* THREAD CONNECTOR */
+  .thread-connector { display: flex; gap: 12px; }
+  .thread-connector-line { display: flex; flex-direction: column; align-items: center; }
+  .connector-bar { width: 2px; background: var(--border); flex: 1; min-height: 20px; margin: 4px 0; }
+
+  /* COMPOSE */
+  .compose-area { padding: 12px 16px; border-bottom: 1px solid var(--border); display: flex; gap: 12px; }
+  .compose-input { flex: 1; background: transparent; border: none; outline: none; color: var(--muted); font-size: 19px; font-family: 'DM Sans', sans-serif; resize: none; }
+  .compose-input::placeholder { color: var(--muted); }
+
+  /* PAGES */
+  .page { display: none; flex-direction: column; }
+  .page.active { display: flex; }
+
+  /* PROFILE */
+  .profile-banner { height: 200px; display: flex; align-items: center; justify-content: center; font-size: 64px; }
+  .kant-banner { background: #1a0a2e; }
+  .marx-banner { background: #1a0505; }
+  .rousseau-banner { background: #051a0d; }
+  .heidegger-banner { background: #1a1f24; }
+  .postman-banner { background: #3d1a00; }
+  .marcuse-banner { background: #051427; }
+  .profile-meta { padding: 16px; }
+  .profile-avi-wrap { margin-top: -52px; margin-bottom: 12px; }
+  .profile-av { width: 100px; height: 100px; border-radius: 50%; border: 4px solid var(--bg); display: flex; align-items: center; justify-content: center; font-size: 44px; overflow: hidden; }
+  .profile-av img { width: 100%; height: 100%; object-fit: cover; }
+  .profile-av.kant { background: #4a235a; }
+  .profile-av.marx { background: #4a0f0f; }
+  .profile-av.rousseau { background: #0f3a1f; }
+  .profile-av.heidegger { background: #2c3e50; }
+  .profile-av.postman { background: #6e2c00; }
+  .profile-av.marcuse { background: #0a2744; }
+  .edit-profile-btn { float: right; margin-top: -72px; background: transparent; border: 1px solid var(--border); color: var(--text); border-radius: 9999px; padding: 8px 18px; font-size: 15px; font-weight: 700; cursor: pointer; font-family: 'DM Sans', sans-serif; }
+  .profile-name { font-size: 20px; font-weight: 800; }
+  .profile-handle { color: var(--muted); font-size: 15px; margin-bottom: 12px; }
+  .profile-bio { font-size: 15px; line-height: 1.55; margin-bottom: 12px; }
+  .profile-meta-row { display: flex; gap: 16px; color: var(--muted); font-size: 15px; margin-bottom: 12px; flex-wrap: wrap; }
+  .profile-stats { display: flex; gap: 20px; font-size: 15px; }
+  .profile-stats a { color: var(--text); text-decoration: none; cursor: pointer; }
+  .profile-stats a:hover { text-decoration: underline; }
+  .profile-stats strong { font-weight: 700; }
+  .profile-stats span { color: var(--muted); }
+  .profile-tabs { display: flex; border-bottom: 1px solid var(--border); }
+  .profile-tab { flex: 1; text-align: center; padding: 16px 0; font-size: 15px; font-weight: 500; color: var(--muted); cursor: pointer; position: relative; transition: color 0.15s; }
+  .profile-tab:hover { background: rgba(255,255,255,0.05); color: var(--text); }
+  .profile-tab.active { color: var(--text); font-weight: 700; }
+  .profile-tab.active::after { content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 56px; height: 4px; background: var(--accent); border-radius: 9999px; }
+
+  /* SIDEBAR */
+  .sidebar-search { background: var(--surface); border-radius: 9999px; padding: 10px 16px; display: flex; align-items: center; gap: 12px; margin: 12px 0 16px; }
+  .sidebar-search svg { width: 18px; height: 18px; fill: var(--muted); flex-shrink: 0; }
+  .sidebar-search input { background: transparent; border: none; outline: none; color: var(--text); font-size: 15px; width: 100%; font-family: 'DM Sans', sans-serif; }
+  .sidebar-search input::placeholder { color: var(--muted); }
+  .sidebar-box { background: var(--surface); border-radius: 16px; margin-bottom: 16px; overflow: hidden; }
+  .sidebar-box h3 { font-size: 20px; font-weight: 800; padding: 12px 16px 4px; }
+  .trending-item { padding: 12px 16px; cursor: pointer; transition: background 0.15s; }
+  .trending-item:hover { background: rgba(255,255,255,0.06); }
+  .trending-cat { font-size: 13px; color: var(--muted); }
+  .trending-topic { font-size: 15px; font-weight: 700; margin: 2px 0; }
+  .trending-count { font-size: 13px; color: var(--muted); }
+  .who-item { display: flex; align-items: center; gap: 12px; padding: 12px 16px; cursor: pointer; transition: background 0.15s; }
+  .who-item:hover { background: rgba(255,255,255,0.06); }
+  .who-info { flex: 1; }
+  .who-info .name { font-weight: 700; font-size: 15px; }
+  .who-info .handle { font-size: 14px; color: var(--muted); }
+  .follow-btn { background: var(--text); color: var(--bg); border: none; border-radius: 9999px; padding: 7px 18px; font-size: 14px; font-weight: 700; cursor: pointer; font-family: 'DM Sans', sans-serif; }
+  .follow-btn:hover { background: #ccc; }
+  .sidebar-more { padding: 12px 16px; color: var(--accent); font-size: 15px; cursor: pointer; }
+  .sidebar-more:hover { text-decoration: underline; }
+  .sidebar-footer { padding: 4px 16px 16px; font-size: 13px; color: var(--muted); line-height: 2; }
+  .sidebar-footer a { color: var(--muted); text-decoration: none; margin-right: 12px; }
+  .notif-dot { width: 8px; height: 8px; background: var(--accent); border-radius: 50%; display: inline-block; margin-left: auto; }
+  .tweet-media { margin-top: 12px; border-radius: 16px; overflow: hidden; display: grid; gap: 2px; width: 100%; }
+  .tweet-media.media-1 { grid-template-columns: 1fr; }
+  .tweet-media.media-2 { grid-template-columns: 1fr 1fr; }
+  .tweet-media.media-3 { grid-template-columns: 1fr 1fr; }
+  .tweet-media.media-4 { grid-template-columns: 1fr 1fr; }
+  .tweet-media .media-item { overflow: hidden; position: relative; background: var(--surface); cursor: pointer; }
+  .tweet-media.media-1 .media-item { height: 400px; }
+  .tweet-media.media-2 .media-item { height: 280px; }
+  .tweet-media.media-3 .media-item:first-child { height: 280px; grid-row: span 2; }
+  .tweet-media.media-3 .media-item:not(:first-child) { height: 139px; }
+  .tweet-media.media-4 .media-item { height: 175px; }
+  .tweet-media .media-item img,
+  .tweet-media .media-item video { width: 100%; height: 100%; object-fit: cover; display: block; transition: filter 0.2s; }
+  .tweet-media .media-item:hover img,
+  .tweet-media .media-item:hover video { filter: brightness(0.85); }
+  .media-play-icon { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 48px; height: 48px; background: rgba(0,0,0,0.6); border-radius: 50%; display: flex; align-items: center; justify-content: center; pointer-events: none; }
+  .media-play-icon svg { width: 22px; height: 22px; fill: #fff; margin-left: 3px; }
+  .media-gif-badge { position: absolute; bottom: 8px; left: 8px; background: rgba(0,0,0,0.7); color: #fff; font-size: 13px; font-weight: 700; padding: 2px 6px; border-radius: 4px; pointer-events: none; }
+</style>
+</head>
+<body>
+<div class="app">
+
+  <!-- LEFT NAV -->
+  <nav class="left-nav">
+    <div class="nav-logo" onclick="showPage('home')">
+      <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+    </div>
+    <div class="nav-item" onclick="showPage('home')">
+      <svg viewBox="0 0 24 24"><path d="M21.591 7.146L12.52 1.157c-.316-.21-.724-.21-1.04 0l-9.071 5.99c-.26.173-.409.456-.409.757v13.183c0 .502.418.913.929.913H8.1c.51 0 .929-.41.929-.913v-7.075h5.941v7.075c0 .502.418.913.929.913h5.171c.51 0 .929-.41.929-.913V7.903c0-.301-.158-.584-.408-.757z"/></svg>
+      <span>Home</span>
+    </div>
+    <div class="nav-item">
+      <svg viewBox="0 0 24 24"><path d="M10.25 3.75c-3.59 0-6.5 2.91-6.5 6.5s2.91 6.5 6.5 6.5c1.795 0 3.419-.726 4.596-1.904 1.178-1.177 1.904-2.801 1.904-4.596 0-3.59-2.91-6.5-6.5-6.5zm-8.5 6.5c0-4.694 3.806-8.5 8.5-8.5 4.694 0 8.5 3.806 8.5 8.5 0 1.986-.682 3.815-1.814 5.262l4.776 4.776-1.414 1.414-4.776-4.776C13.815 19.818 11.986 20.5 10 20.5c-4.694 0-8.5-3.806-8.5-8.5z" fill-rule="evenodd" clip-rule="evenodd"/></svg>
+      <span>Explore</span>
+    </div>
+    <div class="nav-item">
+      <svg viewBox="0 0 24 24"><path d="M19.993 9.042C19.48 5.017 16.054 2 11.996 2s-7.49 3.021-7.999 7.051L2.866 18H7.1c.463 2.282 2.481 4 4.9 4s4.437-1.718 4.9-4h4.236l-1.143-8.958zM12 20c-1.306 0-2.417-.835-2.829-2h5.658c-.412 1.165-1.523 2-2.829 2zm-6.866-4l.847-6.698C6.364 6.272 8.941 4 11.996 4s5.627 2.268 6.013 5.295L18.864 16H5.134z"/></svg>
+      <span>Notifications</span>
+      <div class="notif-dot"></div>
+    </div>
+    <div class="nav-item">
+      <svg viewBox="0 0 24 24"><path d="M1.998 5.5c0-1.381 1.119-2.5 2.5-2.5h15c1.381 0 2.5 1.119 2.5 2.5V17c0 1.381-1.119 2.5-2.5 2.5h-15c-1.381 0-2.5-1.119-2.5-2.5V5.5zm2.5-.5c-.276 0-.5.224-.5.5V17c0 .276.224.5.5.5h15c.276 0 .5-.224.5-.5V5.5c0-.276-.224-.5-.5-.5h-15zm6.84 7.56l-3.5-3 1.324-1.12 2.29 1.963 4.326-3.5L16.002 8l-4.664 3.56z" fill-rule="evenodd" clip-rule="evenodd"/></svg>
+      <span>Subscriptions</span>
+    </div>
+    <div class="nav-item">
+      <svg viewBox="0 0 24 24"><path d="M17.707 9.293l-5-5a1 1 0 00-1.414 0l-5 5a1 1 0 001.414 1.414L11 7.414V20h2V7.414l3.293 3.293a1 1 0 001.414-1.414z"/></svg>
+      <span>Bookmarks</span>
+    </div>
+    <div class="nav-item" onclick="showPage('profile-kant')">
+      <svg viewBox="0 0 24 24"><path d="M5.651 19h12.698c-.337-1.8-1.023-3.21-1.945-4.19C15.318 13.65 13.838 13 12 13s-3.317.65-4.404 1.81c-.922.98-1.608 2.39-1.945 4.19zm.486-5.56C7.627 11.85 9.648 11 12 11s4.373.85 5.863 2.44c1.477 1.58 2.366 3.8 2.632 6.46l.11 1.1H3.395l.11-1.1c.266-2.66 1.155-4.88 2.632-6.46zM12 4c-1.105 0-2 .9-2 2s.895 2 2 2 2-.9 2-2-.895-2-2-2zM8 6c0-2.21 1.791-4 4-4s4 1.79 4 4-1.791 4-4 4-4-1.79-4-4z" fill-rule="evenodd" clip-rule="evenodd"/></svg>
+      <span>Profile</span>
+    </div>
+    <button class="post-btn">Post</button>
+    <div class="nav-profile" onclick="showPage('profile-kant')" id="nav-profile-kant"></div>
+  </nav>
+
+  <!-- FEED -->
+  <main class="feed">
+    <div id="page-home" class="page active"></div>
+    <div id="page-thread" class="page"></div>
+    <div id="page-profile-kant" class="page"></div>
+    <div id="page-profile-rousseau" class="page"></div>
+    <div id="page-profile-marx" class="page"></div>
+  </main>
+
+  <!-- RIGHT SIDEBAR -->
+  <aside class="right-sidebar">
+    <div class="sidebar-search">
+      <svg viewBox="0 0 24 24"><path d="M10.25 3.75c-3.59 0-6.5 2.91-6.5 6.5s2.91 6.5 6.5 6.5c1.795 0 3.419-.726 4.596-1.904 1.178-1.177 1.904-2.801 1.904-4.596 0-3.59-2.91-6.5-6.5-6.5zm-8.5 6.5c0-4.694 3.806-8.5 8.5-8.5 4.694 0 8.5 3.806 8.5 8.5 0 1.986-.682 3.815-1.814 5.262l4.776 4.776-1.414 1.414-4.776-4.776C13.815 19.818 11.986 20.5 10 20.5c-4.694 0-8.5-3.806-8.5-8.5z"/></svg>
+      <input placeholder="Search PhilosoTweets">
+    </div>
+    <div class="sidebar-box">
+      <h3>Trending in Philosophy</h3>
+      <div class="trending-item"><div class="trending-cat">Philosophy · Trending</div><div class="trending-topic">#CategoricalImperative</div><div class="trending-count">89.4K posts</div></div>
+      <div class="trending-item"><div class="trending-cat">Technology · Trending</div><div class="trending-topic">#AliénationNumérique</div><div class="trending-count">52.1K posts</div></div>
+      <div class="trending-item"><div class="trending-cat">Politics · Trending</div><div class="trending-topic">#MeansOfProduction</div><div class="trending-count">41.0K posts</div></div>
+      <div class="trending-item"><div class="trending-cat">Philosophy · Trending</div><div class="trending-topic">#GeneralWill</div><div class="trending-count">28.7K posts</div></div>
+      <div class="trending-item"><div class="trending-cat">Philosophy · Trending</div><div class="trending-topic">#NobleWild</div><div class="trending-count">18.3K posts</div></div>
+      <div class="trending-item"><div class="trending-cat">AI · Trending</div><div class="trending-topic">Alienated Labor UI</div><div class="trending-count">14.9K posts</div></div>
+      <div class="trending-item"><div class="trending-cat">Discourse · Trending</div><div class="trending-topic">On Science and Art</div><div class="trending-count">9.2K posts</div></div>
+      <div class="sidebar-more">Show more</div>
+    </div>
+    <div class="sidebar-box">
+      <h3>Who to follow</h3>
+      <div class="who-item" id="who-rousseau"></div>
+      <div class="who-item" id="who-marx"></div>
+      <div class="who-item">
+        <div class="av sm" style="background:#1a1a3e;">🎭</div>
+        <div class="who-info"><div class="name">Friedrich Nietzsche</div><div class="handle">@god.is.dead</div></div>
+        <button class="follow-btn" onclick="this.textContent=this.textContent==='Follow'?'Following':'Follow'">Follow</button>
+      </div>
+      <div class="sidebar-more">Show more</div>
+    </div>
+    <div class="sidebar-footer">
+      <a>Terms of Service</a><a>Privacy Policy</a><a>Cookie Policy</a><a>Accessibility</a><a>Ads info</a><br>
+    </div>
+  </aside>
+</div>
+
+<script>
+// ─── DATA ────────────────────────────────────────────────────────────────────
+
+const PHI = {
+  kant: {
+    name: 'Immanuel Kant',
+    handle: '@kantegorical_imperativ',
+    emoji: '⚖️',
+    color: 'kant',
+    img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/43/Immanuel_Kant_3.jpg/440px-Immanuel_Kant_3.jpg',
+    postCount: '3,241',
+    following: '312',
+    followers: '4.2M',
+    location: '📍 Königsberg, Prussia',
+    link: '🔗 critique-of-pure-reason.substack.com',
+    joined: '📅 Joined April 1724',
+    bio: '⚖️ philosopher · deontologist · categorical absolutist<br>your vibe is either universalizable or it isn\'t. no cap.<br>pure reason posted daily · königsberg native (never left, didn\'t need to)<br>autonomy &gt; everything · treating people as ends since 1724',
+    banner: 'kant-banner',
+    isMe: true
+  },
+  rousseau: {
+    name: 'Jean-Jacques Rousseau',
+    handle: '@the_real_rousseau',
+    emoji: '🌿',
+    color: 'rousseau',
+    img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Jean-Jacques_Rousseau_%28painted_portrait%29.jpg/440px-Jean-Jacques_Rousseau_%28painted_portrait%29.jpg',
+    postCount: '12',
+    following: '0',
+    followers: '4.7M',
+    location: '📍 the forest (gone to touch grass, back never)',
+    link: '🔗 social-contract.substack.com',
+    joined: '📅 Joined June 1712',
+    bio: '🌿 philosopher · contrarian · off-grid enthusiast<br>science and the arts corrupted us. i said what i said 🙂‍↔️<br>ur iphone is making you morally broke, not just broke broke<br>general will &gt; individual rizz every time 💚',
+    banner: 'rousseau-banner'
+  },
+  marx: {
+    name: 'Karl Marx',
+    handle: '@das_kapital',
+    emoji: '✊',
+    color: 'marx',
+    img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Karl_Marx_001.jpg/440px-Karl_Marx_001.jpg',
+    postCount: '848',
+    following: '3',
+    followers: '2.1M',
+    location: '📍 haunting europe (as per)',
+    link: '🔗 das-kapital.substack.com',
+    joined: '📅 Joined May 1818',
+    bio: '☭ philosopher · economist · main character of history<br>ur fav CEO\'s worst nightmare 💀<br>AI is just alienated labor with a prettier UI bestie<br>engels is my forever person 🤝 | no cap, stateless society or bust',
+    banner: 'marx-banner'
+  },
+  heidegger: {
+    name: 'Martin Heidegger',
+    handle: '@heidegerrrrr',
+    emoji: '🫥',
+    color: 'heidegger',
+    banner: 'heidegger-banner'
+  },
+  postman: {
+    name: 'Neil Postman',
+    handle: '@technopoly_nineteen92',
+    emoji: '📺',
+    color: 'postman',
+    banner: 'postman-banner'
+  },
+  marcuse: {
+    name: 'Herbert Marcuse',
+    handle: '@not_one_dimensional_man',
+    emoji: '🔴',
+    color: 'marcuse',
+    banner: 'marcuse-banner'
+  }
+};
+
+// ─── ICONS ───────────────────────────────────────────────────────────────────
+
+const IC = {
+  verified: `<svg viewBox="0 0 24 24"><path d="M20.396 11c-.018-.646-.215-1.275-.57-1.816-.354-.54-.852-.972-1.438-1.246.223-.607.27-1.264.14-1.897-.131-.634-.437-1.218-.882-1.687-.47-.445-1.053-.75-1.687-.882-.633-.13-1.29-.083-1.897.14-.273-.587-.704-1.086-1.245-1.44S11.647 1.62 11 1.604c-.646.017-1.273.213-1.813.568s-.969.854-1.24 1.44c-.608-.223-1.267-.272-1.902-.14-.635.13-1.22.436-1.69.882-.445.47-.749 1.055-.878 1.688-.13.633-.08 1.29.144 1.896-.587.274-1.087.705-1.443 1.245-.356.54-.555 1.17-.574 1.817.02.647.217 1.276.572 1.817.355.54.854.971 1.441 1.245-.224.607-.272 1.264-.14 1.897.13.634.437 1.218.882 1.687.47.445 1.053.75 1.687.882.633.13 1.29.083 1.897-.14.273.587.704 1.086 1.245 1.44.54.354 1.17.551 1.816.569.647-.016 1.276-.213 1.817-.567.539-.355.970-.854 1.243-1.44.608.222 1.268.272 1.902.14.635-.13 1.22-.436 1.69-.882.445-.47.749-1.055.878-1.688.13-.633.08-1.29-.144-1.896.587-.274 1.087-.705 1.443-1.245.356-.54.555-1.17.574-1.817zm-9.217 2.803l-2.56-2.56 1.06-1.06 1.5 1.5 3.5-3.5 1.06 1.06-4.56 4.56z"/></svg>`,
+  reply:    `<svg viewBox="0 0 24 24"><path d="M1.751 10c0-4.42 3.584-8 8.005-8h4.366c4.49 0 8.129 3.64 8.129 8.13 0 2.96-1.607 5.68-4.196 7.11l-8.054 4.46v-3.69h-.067c-4.49.1-8.183-3.51-8.183-8.01zm8.005-6c-3.317 0-6.005 2.69-6.005 6 0 3.37 2.77 6.08 6.138 6.01l.351-.01h1.761v2.3l5.087-2.81c1.951-1.08 3.163-3.13 3.163-5.36 0-3.39-2.744-6.13-6.129-6.13H9.756z"/></svg>`,
+  retweet:  `<svg viewBox="0 0 24 24"><path d="M4.5 3.88l4.432 4.14-1.364 1.46L5.5 7.55V16c0 1.1.896 2 2 2H13v2H7.5c-2.209 0-4-1.79-4-4V7.55L1.432 9.48.068 8.02 4.5 3.88zM16.5 6H11V4h5.5c2.209 0 4 1.79 4 4v8.45l2.068-1.93 1.364 1.46-4.432 4.14-4.432-4.14 1.364-1.46 2.068 1.93V8c0-1.1-.896-2-2-2z"/></svg>`,
+  like:     `<svg viewBox="0 0 24 24"><path d="M16.697 5.5c-1.222-.06-2.679.51-3.89 2.16l-.805 1.09-.806-1.09C9.984 6.01 8.526 5.44 7.304 5.5c-1.243.07-2.349.78-2.91 1.91-.552 1.12-.633 2.78.479 4.82 1.074 1.97 3.257 4.27 7.129 6.61 3.87-2.34 6.052-4.64 7.126-6.61 1.111-2.04 1.03-3.7.477-4.82-.561-1.13-1.666-1.84-2.908-1.91zm4.187 7.69c-1.351 2.48-4.001 5.12-8.379 7.67l-.503.3-.504-.3c-4.379-2.55-7.029-5.19-8.382-7.67-1.36-2.5-1.41-4.86-.514-6.67.887-1.79 2.647-2.91 4.601-3.01 1.651-.09 3.368.56 4.798 2.01 1.429-1.45 3.146-2.1 4.796-2.01 1.954.1 3.714 1.22 4.601 3.01.896 1.81.846 4.17-.514 6.67z"/></svg>`,
+  views:    `<svg viewBox="0 0 24 24"><path d="M8.75 21V3h2v18h-2zM18 21V8.5h2V21h-2zM4 21l.004-10h2L6 21H4zm9.248 0v-7h2v7h-2z"/></svg>`,
+  back:     `<svg viewBox="0 0 24 24"><path d="M7.414 13l5.043 5.04-1.414 1.42L3.586 12l7.457-7.46 1.414 1.42L7.414 11H21v2H7.414z"/></svg>`
+};
+
+// ─── HELPERS ─────────────────────────────────────────────────────────────────
+
+function avatar(key, size = '') {
+  const p = PHI[key];
+  const cls = `av ${p.color}${size ? ' ' + size : ''}`;
+  const inner = p.img
+    ? `<img src="${p.img}" alt="${p.name}" onerror="this.style.display='none';this.parentElement.textContent='${p.emoji}'">`
+    : p.emoji;
+  return `<div class="${cls}" onclick="event.stopPropagation();showPage('profile-${key}')">${inner}</div>`;
+}
+
+function badge(key) {
+  return `<span class="verified ${key}-v">${IC.verified}</span>`;
+}
+
+function actions(r, rt, l, v, stopProp = true) {
+  const sp = stopProp ? 'event.stopPropagation();' : '';
+  return `<div class="tweet-actions">
+    <div class="action-btn" onclick="${sp}">${IC.reply} ${r}</div>
+    <div class="action-btn retweet" onclick="${sp}this.classList.toggle('retweeted')">${IC.retweet} ${rt}</div>
+    <div class="action-btn like" onclick="${sp}this.classList.toggle('liked')">${IC.like} ${l}</div>
+    <div class="action-btn" onclick="${sp}">${IC.views} ${v}</div>
+  </div>`;
+}
+
+function tweetHeader(key, time) {
+  const p = PHI[key];
+  return `<div class="tweet-header">
+    <span class="tweet-name" onclick="event.stopPropagation();showPage('profile-${key}')">${p.name}</span>
+    ${badge(key)}
+    <span class="tweet-handle">${p.handle}</span>
+    <span class="tweet-dot">·</span>
+    <span class="tweet-time">${time}</span>
+  </div>`;
+}
+
+function mediaGrid(media) {
+  if (!media || !media.length) return '';
+  const count = media.length;
+  const items = media.map(m => {
+    if (m.type === 'video') return `
+      <div class="media-item">
+        <video src="${m.src}" muted loop playsinline></video>
+        <div class="media-play-icon"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+      </div>`;
+    if (m.type === 'gif') return `
+      <div class="media-item">
+        <img src="${m.src}" alt="">
+        <div class="media-gif-badge">GIF</div>
+      </div>`;
+    return `<div class="media-item"><img src="${m.src}" alt="${m.alt ?? ''}"></div>`;
+  }).join('');
+  return `<div class="tweet-media media-${count}">${items}</div>`;
+}
+
+function tweet(key, time, text, stats, opts = {}) {
+  const p = PHI[key];
+  const replyLine = opts.replyTo
+    ? `<div class="replying-to">Replying to <a onclick="showPage('profile-${opts.replyTo}')">${PHI[opts.replyTo]?.handle ?? opts.replyTo}</a></div>`
+    : '';
+  const clickTarget = opts.onclick ?? '';
+  return `<div class="tweet" onclick="${clickTarget}">
+    <div class="tweet-main">
+      ${avatar(key)}
+      <div class="tweet-body">
+        ${tweetHeader(key, time)}
+        ${replyLine}
+        <div class="tweet-text">${text}</div>
+        ${mediaGrid(opts.media)}
+        ${actions(...stats)}
+      </div>
+    </div>
+  </div>`;
+}
+
+// ─── PAGES ───────────────────────────────────────────────────────────────────
+
+function buildHome() {
+  return `
+    <div class="feed-header">
+      <div class="feed-header-inner"><h2>Home</h2></div>
+      <div style="display:flex;border-bottom:1px solid var(--border);">
+        <div class="profile-tab active" style="flex:1;text-align:center;padding:16px 0;font-size:15px;font-weight:700;">For you</div>
+        <div class="profile-tab" style="flex:1;text-align:center;padding:16px 0;font-size:15px;">Following</div>
+      </div>
+    </div>
+    <div class="compose-area">
+      ${avatar('kant', 'sm')}
+      <textarea class="compose-input" placeholder="What is happening?!" rows="3"></textarea>
+    </div>
+
+    <!-- Kant OP preview with thread connector -->
+    <div class="tweet" onclick="showPage('thread')">
+      <div class="thread-connector">
+        <div class="thread-connector-line">
+          ${avatar('kant')}
+          <div class="connector-bar"></div>
+        </div>
+        <div class="tweet-body">
+          ${tweetHeader('kant', '4h')}
+          <div class="tweet-text">To my philosopher oomfs, I found myself pondering over an extremely enticing question…\n\nAre we truly free in our relationship with technology, or are we quietly trading our autonomy for convenience? Read more... 🧵</div>
+          ${actions('847', '2.1K', '14.2K', '89K')}
+        </div>
+      </div>
+      <div style="margin-left:60px;">
+        ${avatar('rousseau', 'sm')}
+        <span style="font-size:14px;color:var(--muted);">Rousseau and Marx replied</span>
+      </div>
+    </div>
+
+    ${tweet('rousseau', '6h',
+      'scientists rly be tellin us progress is good. but nobody\'s happier. nobody\'s kinder. MAKE IT MAKE SENSE!! yall are still not getting it 😔',
+      ['312', '891', '5.5K', '22K'],
+      { onclick: "showPage('profile-rousseau')" }
+    )}
+
+    ${tweet('marx', '8h',
+      'OpenAI valued at $300B. meanwhile the ppl who actually trained the models get screwed over. the bourgeoisie understood the assignment and yall rly out here saying "at least i get free ChatGPT" 💀 mad sad bad surplus value extraction',
+      ['4.2K', '8.8K', '40K', '180K'],
+      { onclick: "showPage('profile-marx')" }
+    )}`;
+}
+
+function buildThread() {
+  return `
+    <div class="feed-header">
+      <div class="feed-header-inner">
+        <div class="back-btn" onclick="showPage('home')">${IC.back}</div>
+        <h2>Thread</h2>
+      </div>
+    </div>
+
+    <!-- OP tweet -->
+    <div class="tweet op">
+      <div class="tweet-main">
+        ${avatar('kant')}
+        <div class="tweet-body">
+          ${tweetHeader('kant', '')}
+          <div class="tweet-handle" style="font-size:15px;margin-bottom:8px;">${PHI.kant.handle}</div>
+        </div>
+      </div>
+      <div class="tweet-text">To my philosopher oomfs, I found myself pondering over an extremely enticing question…\n\nAre we truly free in our relationship with technology, or are we quietly trading our autonomy for convenience?\n\nFor though some say that we no longer claim dominion over these tools, I cannot help but feel that technology is merely one invention that emerges from our unsociable tendencies. I prophesize that all the suffering it inflicts shall someday advance the human species because... Read more... 🧵</div>
+      ${mediaGrid([{ type: 'image', src: './kant-opening-media-img.png' }])}
+      <div class="tweet-time-full">4:23 PM · Apr 23, 2026 · <strong>89.4M</strong> views</div>
+      <div class="tweet-stats">
+        <div class="stat"><strong>2,147</strong> <span>Reposts</span></div>
+        <div class="stat"><strong>514</strong> <span>Quotes</span></div>
+        <div class="stat"><strong>14,231</strong> <span>Likes</span></div>
+        <div class="stat"><strong>423</strong> <span>Bookmarks</span></div>
+      </div>
+      ${actions('', '', '', '', false)}
+    </div>
+
+    <div style="padding:12px 16px;color:var(--muted);font-size:14px;border-bottom:1px solid var(--border);">replies</div>
+
+    ${tweet('rousseau',
+      '3h', 
+      "I ain't reading allat, go outside you f*ckin barbarian",
+      ['312', '891', '5.5K', '22K'], 
+      {replyTo: 'kant'})
+    }
+
+    ${tweet('marx', 
+      '3h', 
+      `"autonomy"? You fail to ask. Who truly owns the technology? Who truly profits from it?\n\nThis is not a relationship between technology and man. It is EXPLOITATION!!! Dressed up as CONVENIENCE!!! We have become slaves to technology…………….. The master….`, 
+      ['891', '6.7K', '31.0K', '142K'], 
+      {replyTo: 'kant'})
+    }
+
+    ${tweet('marx', 
+      '3h', 
+      `also <a onclick="showPage('profile-rousseau')">@the_real_rousseau</a> bruh your "outside" has been enclosed, commodified, and sold back to you as a "glamping experience" for $400/night 😭 the nature youre romanticizing isn't real. go on and touch the grass that someone else owns king`, 
+      ['447', '9.1K', '52.3K', '230K'], 
+      {replyTo: 'rousseau'})
+    }
+
+    ${tweet('heidegger', 
+      '2h', 'just be woke lowk - let that sink in let that simmer let that marinate let it cook let it bake let it airfry (wait not airfry because it turns food into a standing reserve). The enframing already got yall. NOT the vibe. This highkey NOT bussin fr fr no cap think abt it but remember to think SLOWWWWWLLLLLLYYYYYYYY', 
+      ['203', '1.4K', '9.1K', '44K'], 
+      {replyTo: 'kant'})
+    }
+
+    ${tweet('postman', 
+      '2h', 
+      `As a reference to my super awesome amazing book, Technopoly (you guys should check it out, lol hehe), every technology is a Faustian bargain. It gives something yes, but it can also take it away.\n\nAnd since none of you will read anything longer than this thread, I'll simplify (though I did already write a whole book about this… Technopoly. 1992 btw - give it a read plz lol)\n\nYou think technology is just a "tool", but it isn't. Technological change, in chapter 1 of my book, btw, I speak of it changing everything. Our habits, values, and beliefs will evolve in ways that technology wants them to.`, 
+      ['89', '3.3K', '18.4K', '71K'], 
+      { replyTo: 'kant', media: [{ type: 'image', src: './postman-hamster-img.png' }] })
+    }
+
+    ${tweet('postman', 
+      '2h', 
+      `the clock, as I reference in my book Technopoly (1992) - y'all should go check it out btw lmaooo - did not just help tell time, but it restructured your life around schedules, and now you have become enslaved to the system.\n\nOMG, also, I wrote a book. It's called Technopoly. I'm talking about this EXACT question, <a onclick="showPage('profile-kant')">@kantegorical_imperativ</a>. Half price if you order from <a>here</a> by tmrw!!!!!!! Get it at a reduced price while you can!`, 
+      ['312', '5.5K', '22.0K', '90K'],
+      {media: [{
+        type: 'image', 
+        src: ''}]
+      })
+    }
+
+    ${tweet('postman',
+      '1h',
+      `The air has shifted.. The aura and chakras are not aligning with humanity… we have moved from tool-using cultures → technocracy → technopoly. Technology is not supporting culture; it REPLACES it. We no longer ask "why should we do this?" only "how can we do this faster?"\n\nalso, you trust data over judgment. Engagement over meaning. Numbers over wisdom - if the algorithm says its good, it must be right?\n\n(KING THAMUS TRIED TO WARN YALL BTW!!! INVENTORS ARE THE WORST JUDGES OF THEIR OWN INVENTIONS)\n\nthe real issue here, the real problemo is that we dont even feel oppressed. We are entertained and obsessed with information, speed, and the "magic" of technology.\n\nanyways if you want the long version, i already wrote it. But then again, you wont read it. You'll scroll (which is literally my point a play on words im so awesome and funny and witty everyone go read my book fr tho Technopoly. 1992)\n\n<a>#Technopoly #1992 #ThamusWon #readmybook</a>`,
+      ['891', '8.8K', '40K', '180K'])
+    }
+
+    ${tweet('marcuse',
+      '1h', `So called "free thinkers" when Kant engagement baits and you philosophers are quote tweeting instead of donating to charities. Stop wasting your time and actually do something worthwhile <a href="https://www.unicefusa.org/" target="_blank">unicefusa.org</a>\n\nPostman we see your book lil bro. Calm tf down. Why you yappin sm those quotes are getting redundant I'm gonna cancel my preorder`, 
+      ['1.1K', '11.2K', '67.0K', '290K'])
+    }
+
+    ${tweet('marcuse', 
+      '55m', `and before you dumbasses say "but Herb, the discourse IS worthwhile" - no. no the f*ck it isn't. That's exactly what tech WANTS y'all to think. This sh*t we do gives us the feeling of resistance while delivering us unapologetically, pacified, back to a system that feeds us false needs. this aint true dopaminemaxxing dawg. U not different bro, ur so far in the prison that u can't even imagine being free anymore bc the algorithm made it look like prison eats. It's so cooked. Ur all so cooked.`,
+      ['2.3K', '18.4K', '89.0K', '410K'])
+    }
+
+    ${tweet('marx', 
+      '50m', 'OMG it\'s my disciple 😊😊😊 the only good thing that came out of this system fr', 
+      ['4.2K', '8.8K', '41K', '180K'], 
+      { replyTo: 'marcuse' })
+    }
+
+    ${tweet('heidegger', 
+      '45m', 
+      'broski. forget abt that system nonsense. let\'s all go to the museum and look at the art. Art. ART. MONA LISA. PICASSO. UM. OTHER ARTISTS. THEY\'LL SAVE US ALL IF WE LOOK LONG ENOUGH OUR SALVATION IS HIDDEN EVERYWHERE WE\'RE JUST NOT LOOKING AROUND', 
+      ['2.1K', '7.8K', '33K', '150K'])
+    }
+
+    ${tweet('marcuse', 
+      '40m', 
+      `BRO U DA REAL ART. WHERE WERE U ALL MY LIFE THATS WHAT IVE BEEN TRYNA SAY FOR YEARS. LET'S ALL GO TO THE MUSEUM AND RECLAIM OUR INTERIOR LIVES AND KICK ALL THE INTROJECTION THAT AROSE WITHIN US FROM THIS CAPITALIST SOCIETY OUT OF OUR SYSTEM AND RECLAIM OUR SECOND DIMENSION RAHHHHHH\n\nART IS TECHNE AND TECHNOLOGY SHOULD BE A PAINTBRUSH--THE WORLD OUR ART PIECE. @heidegerrrrr will u be the eros to my thanatos 🥺👉👈`, 
+      ['3.1K', '14.2K', '55K', '220K'])
+    }
+
+    ${tweet('heidegger', 
+      '35m', 'will i be ur eros? First i must question what love is in order to have a free relationship to it. What is love? Baby dont hurt me', 
+      ['5.5K', '22.1K', '91K', '380K'], 
+      { replyTo: 'marcuse' })
+    }
+
+    ${tweet('rousseau', 
+      '30m', 
+      'what is bro saying 🙏🙏🙏', 
+      ['8.8K', '33.0K', '120K', '500K'])
+    }
+
+    ${tweet('kant', 
+      '25m', 
+      "y'all r talking all this smack abt technology but yall cant do anything abt it 🙄 so stop being haters and accept the fact that…Read more… #engagement", 
+      ['847', '2.1K', '14.2K', '89K'])
+    }
+
+    ${tweet('rousseau', 
+      '22m', 
+      'shut tf uo', 
+      ['22.1K', '87K', '340K', '1.2M'], 
+      { replyTo: 'kant' })
+    }
+
+    ${tweet('postman', 
+      '20m', 
+      "w-wait. Kant. m-maybe u have a point. We can't just be black and white guys. *looks around at everyone* In my book Technopoly (1992), I say that we can't be like Theuth. But we can't be like Thamus either. We gotta be Theumas. Thomas. Theodore. Idk who these ppl r but yall get the point. And if you dont, check out my book Technopoly (1992), now on SALEEEEEE", 
+      ['1.1K', '5.4K', '28K', '110K'])
+    }
+
+    ${tweet('marcuse', 
+      '15m', 
+      `When in a few years you philosophers are forced to mine bitcoin for Grok and Elon I'm blaming it on this X thread alone. Focus your clicks on saving the turts instead <a href="https://saveturtles.org/" target="_blank">saveturtles.org</a>`, 
+      ['3.3K', '12.4K', '59K', '240K'])
+    }
+
+    ${tweet('marx', 
+      '10m', 
+      "ok but i lowkenuinely think yall have a point. I think technology could save us IFFFFFFF C*PITALISM DIDN'T EXIST. what do yall think abt perchance dismantling the material base to fix our superstructure uwu VIVA LA REVOLUTION", 
+      ['6.6K', '28.1K', '110K', '450K'])
+    }
+
+    ${tweet('rousseau', 
+      '5m', 
+      "fack allat let's return to monke 🐒", 
+      ['44.0K', '188K', '820K', '3.1M'], 
+      { replyTo: 'marx' })
+    }`;
+}
+
+function buildProfile(key) {
+  const p = PHI[key];
+  const profileTweets = {
+    kant: [
+      { time: '4h', text: 'Are we truly free in our relationship to technology, or have we become mere instruments of the instruments we created? The categorical imperative demands we ask: could we universalize a maxim of unconditional technological dependence?\n\nI think not. 🧵', stats: ['847', '2.1K', '14.2K', '89K'], onclick: "showPage('thread')" },
+      { time: '1d', text: 'Hot take: the maxim "i\'ll do what i want" is categorically self-defeating because if everyone did what they wanted with no rational principle, the concept of "wanting" would collapse entirely. this is first year deontology. get it together.', stats: ['2.1K', '7.8K', '33K', '150K'] }
+    ],
+    rousseau: [
+      { time: '3h', text: "kant babe but you're asking the wrong question. it's not about WHETHER we can be free within technological society — it's that technological society itself is the cage. the sciences and arts didn't liberate us. they corrupted us 🌿", stats: ['203', '1.4K', '9.1K', '44K'], onclick: "showPage('thread')" },
+      { time: '6h', text: "science be tellin us progress is good. but nobody's happier. nobody's kinder. MAKE IT MAKE SENSE. yall still not getting it 😔", stats: ['312', '891', '5.5K', '22K'] }
+    ],
+    marx: [
+      { time: '2h', text: "okay both of you but you're both doing idealism and i can't 💀\n\nthe question isn't whether technology COULD be a tool of freedom in the abstract. the question is: who OWNS the technology? freedom is a material question bestie ✊", stats: ['891', '6.7K', '31.0K', '142K'], onclick: "showPage('thread')" },
+      { time: '8h', text: 'OpenAI valued at $300B while the people who actually trained the models get stock options that vest in 4 years. the bourgeoisie understood the assignment and yall are out here saying "at least i get free ChatGPT" 💀 this is literally surplus value extraction on a cosmic scale', stats: ['4.2K', '8.8K', '40K', '180K'] }
+    ]
+  };
+
+  const tweetsHTML = (profileTweets[key] || []).map(t =>
+    tweet(key, t.time, t.text, t.stats, { onclick: t.onclick ?? '' })
+  ).join('');
+
+  return `
+    <div class="feed-header">
+      <div class="feed-header-inner">
+        <div class="back-btn" onclick="showPage('home')">${IC.back}</div>
+        <div><h2>${p.name}</h2><div style="font-size:13px;color:var(--muted);">${p.postCount ?? ''} posts</div></div>
+      </div>
+    </div>
+    <div class="profile-banner ${p.banner}">${p.img ? '' : p.emoji}</div>
+    <div class="profile-meta">
+      ${p.isMe ? '<button class="edit-profile-btn">Edit profile</button>' : '<button class="edit-profile-btn" style="border-color:var(--border);">Follow</button>'}
+      <div class="profile-avi-wrap">
+        <div class="profile-av ${p.color}">
+          ${p.img ? `<img src="${p.img}" alt="${p.name}" onerror="this.style.display='none';this.parentElement.textContent='${p.emoji}'">` : p.emoji}
+        </div>
+      </div>
+      <div class="profile-name">${p.name} <span class="verified ${p.color}-v" style="vertical-align:middle;">${IC.verified}</span></div>
+      <div class="profile-handle">${p.handle}</div>
+      ${p.bio ? `<div class="profile-bio">${p.bio}</div>` : ''}
+      ${p.location ? `<div class="profile-meta-row"><span>${p.location}</span>${p.link ? `<span>${p.link}</span>` : ''}${p.joined ? `<span>${p.joined}</span>` : ''}</div>` : ''}
+      ${p.followers ? `<div class="profile-stats"><a><strong>${p.following}</strong> <span>Following</span></a><a><strong>${p.followers}</strong> <span>Followers</span></a></div>` : ''}
+    </div>
+    <div class="profile-tabs">
+      <div class="profile-tab active">Posts</div>
+      <div class="profile-tab">Replies</div>
+      <div class="profile-tab">Media</div>
+      <div class="profile-tab">Likes</div>
+    </div>
+    ${tweetsHTML}`;
+}
+
+// ─── SIDEBAR WHO TO FOLLOW ────────────────────────────────────────────────────
+
+function buildWhoItem(key) {
+  const p = PHI[key];
+  const inner = p.img
+    ? `<img src="${p.img}" alt="${p.name}" onerror="this.style.display='none';this.parentElement.textContent='${p.emoji}'">`
+    : p.emoji;
+  return `
+    <div class="av sm ${p.color}">${inner}</div>
+    <div class="who-info"><div class="name">${p.name}</div><div class="handle">${p.handle}</div></div>
+    <button class="follow-btn" onclick="this.textContent=this.textContent==='Follow'?'Following':'Follow'">Follow</button>`;
+}
+
+// ─── NAV PROFILE ─────────────────────────────────────────────────────────────
+
+function buildNavProfile() {
+  const p = PHI.kant;
+  const inner = p.img
+    ? `<img src="${p.img}" alt="${p.name}" onerror="this.style.display='none';this.parentElement.textContent='${p.emoji}'">`
+    : p.emoji;
+  return `
+    <div class="av kant" style="width:40px;height:40px;">${inner}</div>
+    <div class="nav-profile-info">
+      <div class="name">${p.name}</div>
+      <div class="handle">${p.handle}</div>
+    </div>`;
+}
+
+// ─── ROUTING ─────────────────────────────────────────────────────────────────
+
+function showPage(name) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  const el = document.getElementById('page-' + name);
+  if (el) { el.classList.add('active'); window.scrollTo(0, 0); }
+}
+
+// ─── INIT ─────────────────────────────────────────────────────────────────────
+
+document.getElementById('page-home').innerHTML = buildHome();
+document.getElementById('page-thread').innerHTML = buildThread();
+document.getElementById('page-profile-kant').innerHTML = buildProfile('kant');
+document.getElementById('page-profile-rousseau').innerHTML = buildProfile('rousseau');
+document.getElementById('page-profile-marx').innerHTML = buildProfile('marx');
+document.getElementById('who-rousseau').innerHTML = buildWhoItem('rousseau');
+document.getElementById('who-marx').innerHTML = buildWhoItem('marx');
+document.getElementById('nav-profile-kant').innerHTML = buildNavProfile();
+</script>
+</body>
+</html>
