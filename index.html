@@ -294,9 +294,8 @@ const PHI = {
   kant: {
     name: 'Immanuel Kant',
     handle: '@kantegorical_imperativ',
-    emoji: '⚖️',
+    img: './kant-pfp',
     color: 'kant',
-    img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/43/Immanuel_Kant_3.jpg/440px-Immanuel_Kant_3.jpg',
     postCount: '3,241',
     following: '312',
     followers: '4.2M',
@@ -310,9 +309,8 @@ const PHI = {
   rousseau: {
     name: 'Jean-Jacques Rousseau',
     handle: '@the_real_rousseau',
-    emoji: '🌿',
+    img: './rousseau-pfp',
     color: 'rousseau',
-    img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Jean-Jacques_Rousseau_%28painted_portrait%29.jpg/440px-Jean-Jacques_Rousseau_%28painted_portrait%29.jpg',
     postCount: '12',
     following: '0',
     followers: '4.7M',
@@ -325,9 +323,8 @@ const PHI = {
   marx: {
     name: 'Karl Marx',
     handle: '@das_kapital',
-    emoji: '✊',
+    img: 'marx-pfp',
     color: 'marx',
-    img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Karl_Marx_001.jpg/440px-Karl_Marx_001.jpg',
     postCount: '848',
     following: '3',
     followers: '2.1M',
@@ -340,21 +337,21 @@ const PHI = {
   heidegger: {
     name: 'Martin Heidegger',
     handle: '@heidegerrrrr',
-    emoji: '🫥',
+    img: './heidegger-pfp',
     color: 'heidegger',
     banner: 'heidegger-banner'
   },
   postman: {
     name: 'Neil Postman',
     handle: '@technopoly_nineteen92',
-    emoji: '📺',
+    img: './postman-pfp',
     color: 'postman',
     banner: 'postman-banner'
   },
   marcuse: {
     name: 'Herbert Marcuse',
     handle: '@not_one_dimensional_man',
-    emoji: '🔴',
+    img: './marcuse-my-goat-pfp.png',
     color: 'marcuse',
     banner: 'marcuse-banner'
   }
@@ -573,7 +570,7 @@ function buildThread() {
     ${tweet('postman',
       '1h',
       `The air has shifted.. The aura and chakras are not aligning with humanity… we have moved from tool-using cultures → technocracy → technopoly. Technology is not supporting culture; it REPLACES it. We no longer ask "why should we do this?" only "how can we do this faster?"\n\nalso, you trust data over judgment. Engagement over meaning. Numbers over wisdom - if the algorithm says its good, it must be right?\n\n(KING THAMUS TRIED TO WARN YALL BTW!!! INVENTORS ARE THE WORST JUDGES OF THEIR OWN INVENTIONS)\n\nthe real issue here, the real problemo is that we dont even feel oppressed. We are entertained and obsessed with information, speed, and the "magic" of technology.\n\nanyways if you want the long version, i already wrote it. But then again, you wont read it. You'll scroll (which is literally my point a play on words im so awesome and funny and witty everyone go read my book fr tho Technopoly. 1992)\n\n<a>#Technopoly #1992 #ThamusWon #readmybook</a>`,
-      ['891', '8.8K', '40K', '180K']
+      ['891', '8.8K', '40K', '180K'],
       {media: [{
         type: 'image', 
         src: './postman-big-brain-img.png'}]
@@ -582,7 +579,7 @@ function buildThread() {
 
     ${tweet('marcuse',
       '1h', `So called "free thinkers" when Kant engagement baits.. You quotetweeters think you’re not a part of the masses but rlly this is you. Stop wasting your time and actually do something worthwhile <a href="https://www.unicefusa.org/" target="_blank">unicefusa.org</a>\n\n <a>@technopoly_nineteen92</a> we see your book lil bro. Calm tf down. Why you yappin sm those quotes are getting redundant I'm gonna cancel my preorder`, 
-      ['1.1K', '11.2K', '67.0K', '290K']
+      ['1.1K', '11.2K', '67.0K', '290K'],
       {media: [{
         type: 'image', 
         src: './postman-big-brain-img.png'}]
@@ -615,7 +612,7 @@ function buildThread() {
     ${tweet('heidegger', 
       '35m', 'will i be ur eros? First i must question what love is in order to have a free relationship to it. What is love? Baby dont hurt me', 
       ['5.5K', '22.1K', '91K', '380K'], 
-      { replyTo: 'marcuse' }
+      { replyTo: 'marcuse' },
       {media: [{
         type: 'image', 
         src: './heidegger-baby-dont-hurt-me-img.png'}]
@@ -656,7 +653,7 @@ function buildThread() {
     ${tweet('marx', 
       '10m', 
       "ok but i lowkenuinely think yall have a point. I think technology could save us IFFFFFFF C*PITALISM DIDN'T EXIST. what do yall think abt perchance dismantling the material base to fix our superstructure uwu VIVA LA REVOLUTION", 
-      ['6.6K', '28.1K', '110K', '450K']
+      ['6.6K', '28.1K', '110K', '450K'],
       {media: [{
         type: 'image', 
         src: './marx-communist-buggs-bunny-img.png'}]
@@ -667,7 +664,7 @@ function buildThread() {
       '5m', 
       "fack allat let's return to monke 🐒", 
       ['44.0K', '188K', '820K', '3.1M'], 
-      { replyTo: 'marx' }
+      { replyTo: 'marx' },
       {media: [{
         type: 'image', 
         src: './rousseau-return-to-monke-img.png'}]
@@ -678,13 +675,6 @@ function buildThread() {
       '2m', 
       "So… to answer the question? Read more… <a>#engagement</a>", 
       ['14.0K', '2K', '1K', '1M'], 
-      { replyTo: 'kant' })
-    }
-
-    ${tweet('marx', 
-      '6m', 
-      "bros saying all this on his iphone 16 pro max 512 gb 6.9-inch Super Retina XDR display im crine TT", 
-      ['34.0K', '12K', '90K', '1.2M'], 
       { replyTo: 'kant' })
     }
             
@@ -699,6 +689,11 @@ function buildThread() {
       '4m',
       `kant you trust data over judgment, yo. We have moved from using tools to letting tools revise us. You think you're "reasoning", but you're just processing fragments. In a technopoly, culture doesn't use tech; TECH REPLACES CULTURE. So basically you're not "free", you're just highly engaged\n\n<a>#Technopoly</a> <a>#1992</a> <a>#ThamusWon</a> <a>#readmybook</a>`,
       ['1.4K', '6.6K', '29K', '115K'],
+      {media: [{
+        type: 'image',
+        src: './postman-data-over-judgement.png'
+      }]
+      },
       { replyTo: 'kant' })
     }
 
