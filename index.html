@@ -398,7 +398,7 @@ function mediaGrid(media) {
   const count = media.length;
   const items = media.map(m => {
     if (m.type === 'video') return `
-      <div class="media-item">
+      <div class="media-item" onclick="event.stopPropagation();const v=this.querySelector('video'),i=this.querySelector('.media-play-icon');if(v.paused){v.play();i.style.display='none';}else{v.pause();i.style.display='flex';}">
         <video src="${m.src}" muted loop playsinline></video>
         <div class="media-play-icon"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
       </div>`;
