@@ -8,12 +8,12 @@
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #000;
-    --surface: #16181c;
-    --surface2: #1e2127;
-    --border: #2f3336;
-    --text: #e7e9ea;
-    --muted: #71767b;
+    --bg: #ffffff;
+    --surface: #f7f9f9;
+    --surface2: #eff3f4;
+    --border: #eff3f4;
+    --text: #0f1419;
+    --muted: #536471;
     --accent: #1d9bf0;
     --accent-hover: #1a8cd8;
     --green: #00ba7c;
@@ -41,22 +41,22 @@
   .nav-logo { padding: 12px 16px; margin-bottom: 4px; cursor: pointer; }
   .nav-logo svg { width: 30px; height: 30px; fill: var(--text); }
   .nav-item { display: flex; align-items: center; gap: 20px; padding: 12px 16px; border-radius: 9999px; cursor: pointer; font-size: 20px; transition: background 0.15s; margin-bottom: 2px; }
-  .nav-item:hover { background: rgba(255,255,255,0.1); }
+  .nav-item:hover { background: rgba(0,0,0,0.07); }
   .nav-item svg { width: 26px; height: 26px; fill: var(--text); }
   .nav-item span { font-size: 19px; }
   .nav-profile { display: flex; align-items: center; gap: 12px; padding: 12px; border-radius: 9999px; cursor: pointer; margin-top: auto; margin-bottom: 12px; transition: background 0.15s; }
-  .nav-profile:hover { background: rgba(255,255,255,0.1); }
+  .nav-profile:hover { background: rgba(0,0,0,0.07); }
   .nav-profile-info .name { font-weight: 600; font-size: 15px; }
   .nav-profile-info .handle { color: var(--muted); font-size: 14px; }
   .post-btn { background: var(--accent); color: #fff; border: none; border-radius: 9999px; padding: 16px; width: 100%; font-size: 17px; font-weight: 700; cursor: pointer; margin-bottom: 8px; transition: background 0.15s; }
   .post-btn:hover { background: var(--accent-hover); }
 
   /* FEED HEADER */
-  .feed-header { position: sticky; top: 0; background: rgba(0,0,0,0.75); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); z-index: 10; }
+  .feed-header { position: sticky; top: 0; background: rgba(255,255,255,0.85); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); z-index: 10; }
   .feed-header-inner { padding: 15px 16px; display: flex; align-items: center; gap: 16px; }
   .feed-header h2 { font-size: 20px; font-weight: 700; }
   .back-btn { width: 34px; height: 34px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: background 0.15s; }
-  .back-btn:hover { background: rgba(255,255,255,0.1); }
+  .back-btn:hover { background: rgba(0,0,0,0.07); }
   .back-btn svg { width: 18px; height: 18px; fill: var(--text); }
 
   /* AVATAR */
@@ -64,16 +64,16 @@
   .av:hover { opacity: 0.85; }
   .av.sm { width: 36px; height: 36px; font-size: 16px; }
   .av img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
-  .av.kant { background: #4a235a; }
-  .av.marx { background: #4a0f0f; }
-  .av.rousseau { background: #0f3a1f; }
-  .av.heidegger { background: #2c3e50; }
-  .av.postman { background: #6e2c00; }
-  .av.marcuse { background: #0a2744; }
+  .av.kant { background: #c9b8e8; }
+  .av.marx { background: #f5c6c6; }
+  .av.rousseau { background: #b8dfc8; }
+  .av.heidegger { background: #c8d3dc; }
+  .av.postman { background: #f5d5b0; }
+  .av.marcuse { background: #b0d4ed; }
 
   /* TWEET */
   .tweet { border-bottom: 1px solid var(--border); padding: 12px 16px; cursor: pointer; transition: background 0.1s; }
-  .tweet:hover { background: rgba(255,255,255,0.03); }
+  .tweet:hover { background: rgba(0,0,0,0.03); }
   .tweet-main { display: flex; gap: 12px; }
   .tweet-body { flex: 1; min-width: 0; }
   .tweet-header { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; margin-bottom: 2px; }
@@ -130,22 +130,22 @@
 
   /* PROFILE */
   .profile-banner { height: 200px; display: flex; align-items: center; justify-content: center; font-size: 64px; }
-  .kant-banner { background: #1a0a2e; }
-  .marx-banner { background: #1a0505; }
-  .rousseau-banner { background: #051a0d; }
-  .heidegger-banner { background: #1a1f24; }
-  .postman-banner { background: #3d1a00; }
-  .marcuse-banner { background: #051427; }
+  .kant-banner { background: #ddd6f3; }
+  .marx-banner { background: #fde8e8; }
+  .rousseau-banner { background: #d4edda; }
+  .heidegger-banner { background: #dde3ea; }
+  .postman-banner { background: #fde8d0; }
+  .marcuse-banner { background: #d0e8f5; }
   .profile-meta { padding: 16px; }
   .profile-avi-wrap { margin-top: -52px; margin-bottom: 12px; }
   .profile-av { width: 100px; height: 100px; border-radius: 50%; border: 4px solid var(--bg); display: flex; align-items: center; justify-content: center; font-size: 44px; overflow: hidden; }
   .profile-av img { width: 100%; height: 100%; object-fit: cover; }
-  .profile-av.kant { background: #4a235a; }
-  .profile-av.marx { background: #4a0f0f; }
-  .profile-av.rousseau { background: #0f3a1f; }
-  .profile-av.heidegger { background: #2c3e50; }
-  .profile-av.postman { background: #6e2c00; }
-  .profile-av.marcuse { background: #0a2744; }
+  .profile-av.kant { background: #c9b8e8; }
+  .profile-av.marx { background: #f5c6c6; }
+  .profile-av.rousseau { background: #b8dfc8; }
+  .profile-av.heidegger { background: #c8d3dc; }
+  .profile-av.postman { background: #f5d5b0; }
+  .profile-av.marcuse { background: #b0d4ed; }
   .edit-profile-btn { float: right; margin-top: -72px; background: transparent; border: 1px solid var(--border); color: var(--text); border-radius: 9999px; padding: 8px 18px; font-size: 15px; font-weight: 700; cursor: pointer; font-family: 'DM Sans', sans-serif; }
   .profile-name { font-size: 20px; font-weight: 800; }
   .profile-handle { color: var(--muted); font-size: 15px; margin-bottom: 12px; }
@@ -170,12 +170,12 @@
   .sidebar-box { background: var(--surface); border-radius: 16px; margin-bottom: 16px; overflow: hidden; }
   .sidebar-box h3 { font-size: 20px; font-weight: 800; padding: 12px 16px 4px; }
   .trending-item { padding: 12px 16px; cursor: pointer; transition: background 0.15s; }
-  .trending-item:hover { background: rgba(255,255,255,0.06); }
+  .trending-item:hover { background: rgba(0,0,0,0.03); }
   .trending-cat { font-size: 13px; color: var(--muted); }
   .trending-topic { font-size: 15px; font-weight: 700; margin: 2px 0; }
   .trending-count { font-size: 13px; color: var(--muted); }
   .who-item { display: flex; align-items: center; gap: 12px; padding: 12px 16px; cursor: pointer; transition: background 0.15s; }
-  .who-item:hover { background: rgba(255,255,255,0.06); }
+  .who-item:hover { background: rgba(0,0,0,0.03); }
   .who-info { flex: 1; }
   .who-info .name { font-weight: 700; font-size: 15px; }
   .who-info .handle { font-size: 14px; color: var(--muted); }
@@ -246,8 +246,8 @@
 
   <!-- FEED -->
   <main class="feed">
-    <div id="page-home" class="page active"></div>
-    <div id="page-thread" class="page"></div>
+    <div id="page-home" class="page"></div>
+    <div id="page-thread" class="page active"></div>
     <div id="page-profile-kant" class="page"></div>
     <div id="page-profile-rousseau" class="page"></div>
     <div id="page-profile-marx" class="page"></div>
@@ -262,23 +262,12 @@
     <div class="sidebar-box">
       <h3>Trending in Philosophy</h3>
       <div class="trending-item"><div class="trending-cat">Philosophy · Trending</div><div class="trending-topic">#CategoricalImperative</div><div class="trending-count">89.4K posts</div></div>
-      <div class="trending-item"><div class="trending-cat">Technology · Trending</div><div class="trending-topic">#AliénationNumérique</div><div class="trending-count">52.1K posts</div></div>
+      <div class="trending-item"><div class="trending-cat">Technology · Trending</div><div class="trending-topic">#Technopoly1992</div><div class="trending-count">52.1K posts</div></div>
       <div class="trending-item"><div class="trending-cat">Politics · Trending</div><div class="trending-topic">#MeansOfProduction</div><div class="trending-count">41.0K posts</div></div>
-      <div class="trending-item"><div class="trending-cat">Philosophy · Trending</div><div class="trending-topic">#GeneralWill</div><div class="trending-count">28.7K posts</div></div>
-      <div class="trending-item"><div class="trending-cat">Philosophy · Trending</div><div class="trending-topic">#NobleWild</div><div class="trending-count">18.3K posts</div></div>
-      <div class="trending-item"><div class="trending-cat">AI · Trending</div><div class="trending-topic">Alienated Labor UI</div><div class="trending-count">14.9K posts</div></div>
+      <div class="trending-item"><div class="trending-cat">Philosophy · Trending</div><div class="trending-topic">#CyborgFeminism</div><div class="trending-count">28.7K posts</div></div>
+      <div class="trending-item"><div class="trending-cat">Philosophy · Trending</div><div class="trending-topic">#FreeNature</div><div class="trending-count">18.3K posts</div></div>
+      <div class="trending-item"><div class="trending-cat">AI · Trending</div><div class="trending-topic">#JustSayNo</div><div class="trending-count">14.9K posts</div></div>
       <div class="trending-item"><div class="trending-cat">Discourse · Trending</div><div class="trending-topic">On Science and Art</div><div class="trending-count">9.2K posts</div></div>
-      <div class="sidebar-more">Show more</div>
-    </div>
-    <div class="sidebar-box">
-      <h3>Who to follow</h3>
-      <div class="who-item" id="who-rousseau"></div>
-      <div class="who-item" id="who-marx"></div>
-      <div class="who-item">
-        <div class="av sm" style="background:#1a1a3e;">🎭</div>
-        <div class="who-info"><div class="name">Friedrich Nietzsche</div><div class="handle">@god.is.dead</div></div>
-        <button class="follow-btn" onclick="this.textContent=this.textContent==='Follow'?'Following':'Follow'">Follow</button>
-      </div>
       <div class="sidebar-more">Show more</div>
     </div>
     <div class="sidebar-footer">
@@ -288,7 +277,7 @@
 </div>
 
 <script>
-// ─── DATA ────────────────────────────────────────────────────────────────────
+// thread
 
 const PHI = {
   kant: {
@@ -435,7 +424,7 @@ function tweet(key, time, text, stats, opts = {}) {
       <div class="tweet-body">
         ${tweetHeader(key, time)}
         ${replyLine}
-        <div class="tweet-text">${text}</div>
+        <div class="tweet-text">${highlight(key, text)}</div>
         ${mediaGrid(opts.media)}
         ${actions(...stats)}
       </div>
@@ -443,59 +432,27 @@ function tweet(key, time, text, stats, opts = {}) {
   </div>`;
 }
 
-// ─── PAGES ───────────────────────────────────────────────────────────────────
+// Main Thread
 
-function buildHome() {
-  return `
-    <div class="feed-header">
-      <div class="feed-header-inner"><h2>Home</h2></div>
-      <div style="display:flex;border-bottom:1px solid var(--border);">
-        <div class="profile-tab active" style="flex:1;text-align:center;padding:16px 0;font-size:15px;font-weight:700;">For you</div>
-        <div class="profile-tab" style="flex:1;text-align:center;padding:16px 0;font-size:15px;">Following</div>
-      </div>
-    </div>
-    <div class="compose-area">
-      ${avatar('kant', 'sm')}
-      <textarea class="compose-input" placeholder="What is happening?!" rows="3"></textarea>
-    </div>
-
-    <!-- Kant OP preview with thread connector -->
-    <div class="tweet" onclick="showPage('thread')">
-      <div class="thread-connector">
-        <div class="thread-connector-line">
-          ${avatar('kant')}
-          <div class="connector-bar"></div>
-        </div>
-        <div class="tweet-body">
-          ${tweetHeader('kant', '4h')}
-          <div class="tweet-text">To my philosopher oomfs, I found myself pondering over an extremely enticing question…\n\nAre we truly free in our relationship with technology, or are we quietly trading our autonomy for convenience? Read more... 🧵</div>
-          ${actions('847', '2.1K', '14.2K', '89K')}
-        </div>
-      </div>
-      <div style="margin-left:60px;">
-        ${avatar('rousseau', 'sm')}
-        <span style="font-size:14px;color:var(--muted);">Rousseau and Marx replied</span>
-      </div>
-    </div>
-
-    ${tweet('rousseau', '6h',
-      'scientists rly be tellin us progress is good. but nobody\'s happier. nobody\'s kinder. MAKE IT MAKE SENSE!! yall are still not getting it 😔',
-      ['312', '891', '5.5K', '22K'],
-      { onclick: "showPage('profile-rousseau')" }
-    )}
-
-    ${tweet('marx', '8h',
-      'OpenAI valued at $300B. meanwhile the ppl who actually trained the models get screwed over. the bourgeoisie understood the assignment and yall rly out here saying "at least i get free ChatGPT" 💀 mad sad bad surplus value extraction',
-      ['4.2K', '8.8K', '40K', '180K'],
-      { onclick: "showPage('profile-marx')" }
-    )}`;
+function highlight(key, text) {
+  const colors = {
+    kant:      '#ede4f5',
+    rousseau:  '#d4edda',
+    marx:      '#fde8e8',
+    heidegger: '#dde3ea',
+    postman:   '#fde8d0',
+    marcuse:   '#d0e8f5'
+  };
+  const bg = colors[key];
+  return text.replace(/<strong>(.*?)<\/strong>/g,
+    `<strong style="background:${bg};border-radius:3px;padding:1px 3px;">$1</strong>`
+  );
 }
 
 function buildThread() {
   return `
     <div class="feed-header">
       <div class="feed-header-inner">
-        <div class="back-btn" onclick="showPage('home')">${IC.back}</div>
         <h2>Thread</h2>
       </div>
     </div>
@@ -509,7 +466,7 @@ function buildThread() {
           <div class="tweet-handle" style="font-size:15px;margin-bottom:8px;">${PHI.kant.handle}</div>
         </div>
       </div>
-      <div class="tweet-text">To my philosopher oomfs, I found myself pondering over an extremely enticing question…\n\nAre we truly free in our relationship with technology, or are we quietly trading our autonomy for convenience?\n\nFor though some say that we no longer claim dominion over these tools, I cannot help but feel that technology is merely one invention that emerges from our unsociable tendencies. I prophesize that all the suffering it inflicts shall someday advance the human species because... Read more... 🧵</div>
+      <div class="tweet-text">To my philosopher oomfs, I found myself pondering over an extremely enticing question… <strong>Are we truly free in our relationship with technology?</strong></div>
       ${mediaGrid([{ type: 'image', src: './kant-opening-media-img.png' }])}
       <div class="tweet-time-full">4:23 PM · Apr 23, 2026 · <strong>89.4M</strong> views</div>
       <div class="tweet-stats">
@@ -525,41 +482,54 @@ function buildThread() {
 
     ${tweet('rousseau',
       '3h', 
-      "I ain't reading allat, go outside you f*ckin barbarian",
+      "I ain't reading allat, go outside you barbarian",
       ['312', '891', '5.5K', '22K'], 
       {replyTo: 'kant'})
     }
 
     ${tweet('marx', 
       '3h', 
-      `"autonomy"? You fail to ask. Who truly owns the technology? Who truly profits from it?\n\nThis is not a relationship between technology and man. It is EXPLOITATION!!! Dressed up as CONVENIENCE!!! We have become slaves to technology…………….. The master….`, 
+      `This is not a relationship between technology and man. It is EXPLOITATION dressed up as CONVENIENCE!!!
+        \n<strong>We have become so far estranged from the products of our labor, labor to be used for someone else’s profit.</strong>
+        \nWe see the shiny new phones but forget about THE PEOPLE, THE REAL HUMAN LIVES who have created what only ends up dominating them in the end.`,
       ['891', '6.7K', '31.0K', '142K'], 
       {replyTo: 'kant'})
     }
 
-    ${tweet('marx', 
-      '3h', 
-      `also <a onclick="showPage('profile-rousseau')">@the_real_rousseau</a> bruh your "outside" has been enclosed, commodified, and sold back to you as a "glamping experience" for $400/night 😭 the nature youre romanticizing isn't real. go on and touch the grass that someone else owns king`, 
-      ['447', '9.1K', '52.3K', '230K'], 
-      {replyTo: 'rousseau'})
-    }
-
     ${tweet('heidegger', 
-      '2h', 'just be woke lowk - let that sink in let that simmer let that marinate let it cook let it bake let it airfry (wait not airfry because it turns food into a standing reserve). The enframing already got yall. NOT the vibe. This highkey NOT bussin fr fr no cap think abt it but remember to think SLOWWWWWLLLLLLYYYYYYYY', 
+      '2h', 
+      `just be woke lowk - let that sink in let that simmer let that marinate let it cook let it bake 
+        \n<strong>The enframing already got yall. NOT the vibe. We're just looking at resources as things, as standing reserves, waiting to be used and optimized, even us smh</strong>`, 
       ['203', '1.4K', '9.1K', '44K'], 
       {replyTo: 'kant'})
     }
 
     ${tweet('postman', 
       '2h', 
-      `As a reference to my super awesome amazing book, Technopoly (you guys should check it out, lol hehe), every technology is a Faustian bargain. It gives something yes, but it can also take it away.\n\nAnd since none of you will read anything longer than this thread, I'll simplify (though I did already write a whole book about this… Technopoly. 1992 btw - give it a read plz lol)\n\nYou think technology is just a "tool", but it isn't. Technological change, in chapter 1 of my book, btw, I speak of it changing everything. Our habits, values, and beliefs will evolve in ways that technology wants them to.`, 
+      `As a reference to my super awesome amazing book, Technopoly (you guys should check it out, lol hehe), every technology is a <strong>Faustian bargain: it gives something, yes, but it can also take it away.</strong>`,
       ['89', '3.3K', '18.4K', '71K'], 
-      { replyTo: 'kant', media: [{ type: 'image', src: './postman-hamster-img.png' }] })
+      { replyTo: 'kant',
+      media: [{ 
+        type: 'image', 
+        src: './postman-hamster-img.png' }] 
+      })
     }
 
     ${tweet('postman', 
       '2h', 
-      `the clock, as I reference in my book Technopoly (1992) - y'all should go check it out btw lmaooo - did not just help tell time, but it restructured your life around schedules, and now you have become enslaved to the system.\n\nOMG, also, I wrote a book. It's called Technopoly. I'm talking about this EXACT question, <a onclick="showPage('profile-kant')">@kantegorical_imperativ</a>. Half price if you order from <a>here</a> by tmrw!!!!!!! Get it at a reduced price while you can!`, 
+      `And since none of you will read anything longer than this thread, I’ll simplify (though I did already write a whole book about this… Technopoly. 1992 btw give it a read plz lol) `,
+      ['12', '5K', '2.0K', '9K'])
+    }
+
+    ${tweet('postman',
+      '1h',
+      `You think technology is just a “tool”, but it isn't. Technological change, in chapter 1 of my book, btw, I speak of <strong>it changing everything. Our habits, values, and beliefs will evolve in ways that technology wants them to.</strong>`,
+      ['891', '8.8K', '40K', '180K'])
+    }
+
+    ${tweet('postman', 
+      '1h', 
+      `for example, the clock, as I reference in my book Technopoly (1992) - y’all should go check it out btw lmaooo - did not just help tell time, but it restructured your life around schedules, and now you have become enslaved to the system.`,
       ['312', '5.5K', '22.0K', '90K'],
       {media: [{
         type: 'image', 
@@ -567,10 +537,30 @@ function buildThread() {
       })
     }
 
+    ${tweet('postman', 
+      '1h', 
+      `The air has shifted.. The aura and chakras are not aligning with humanity… we have moved from <strong>tool-using cultures → technocracy → technopoly.</strong> Technopoly is mentioned in the title of my book, Technopoly. 1992, where <strong>the technology stops supporting culture; it DOMINATES it.</strong>
+      \n We no longer ask “why should we do this?” only “how can we do this faster?” 😮‍💨`,
+      ['112', '1K', '3.6K', '1K'])
+    }
+
+    ${tweet('postman', 
+      '1h', 
+      `also, you trust data over judgment. Engagement over meaning. Numbers over wisdom - if the algorithm says its good, it must be right? 
+      \n(KING THAMUS TRIED TO WARN YALL BTW!!! INVENTORS ARE THE WORST JUDGES OF THEIR OWN INVENTIONS)
+      \n the real issue here, the real problemo is that we dont even feel oppressed. <strong>We are entertained and obsessed with information, speed, and the “magic” of technology.</strong>`,
+      ['63', '1K', '22.0K', '190K'])
+    }
+    
+    ${tweet('marcuse',
+      '1h', `^^ (guys how to retweet 😭)`, 
+      ['1K', '12K', '760K', '123K'])
+    }
+
     ${tweet('postman',
-      '1h',
-      `The air has shifted.. The aura and chakras are not aligning with humanity… we have moved from tool-using cultures → technocracy → technopoly. Technology is not supporting culture; it REPLACES it. We no longer ask "why should we do this?" only "how can we do this faster?"\n\nalso, you trust data over judgment. Engagement over meaning. Numbers over wisdom - if the algorithm says its good, it must be right?\n\n(KING THAMUS TRIED TO WARN YALL BTW!!! INVENTORS ARE THE WORST JUDGES OF THEIR OWN INVENTIONS)\n\nthe real issue here, the real problemo is that we dont even feel oppressed. We are entertained and obsessed with information, speed, and the "magic" of technology.\n\nanyways if you want the long version, i already wrote it. But then again, you wont read it. You'll scroll (which is literally my point a play on words im so awesome and funny and witty everyone go read my book fr tho Technopoly. 1992)\n\n<a>#Technopoly #1992 #ThamusWon #readmybook</a>`,
-      ['891', '8.8K', '40K', '180K'],
+      '1h', `anyways if you want the long version, i already wrote it. 
+      \nBut then again, you wont read it. You’ll scroll (which is literally my point a play on words im so awesome and funny and witty everyone go read my book fr tho Technopoly. 1992)`, 
+      ['11K', '112K', '67.0K', '320K'],
       {media: [{
         type: 'image', 
         src: './postman-big-brain-img.png'}]
@@ -578,8 +568,10 @@ function buildThread() {
     }
 
     ${tweet('marcuse',
-      '1h', `So called "free thinkers" when Kant engagement baits.. You quotetweeters think you’re not a part of the masses but rlly this is you. Stop wasting your time and actually do something worthwhile <a href="https://www.unicefusa.org/" target="_blank">unicefusa.org</a>\n\n <a>@technopoly_nineteen92</a> we see your book lil bro. Calm tf down. Why you yappin sm those quotes are getting redundant I'm gonna cancel my preorder`, 
-      ['1.1K', '11.2K', '67.0K', '290K'],
+      '1h', `So called "free thinkers" when Kant engagement baits.. You quotetweeters think you’re not a part of the masses but rlly this is you. 
+      \nStop wasting your time and actually do something worthwhile <a href="https://www.unicefusa.org/" target="_blank">unicefusa.org</a>
+      \n<a>@technopoly_nineteen92</a> we see your book lil bro. Calm tf down. you keep yappin and ima cancel my preorder`, 
+      ['1.1K', '11.2K', '568K', '290K'],
       {media: [{
         type: 'image', 
         src: './marcuse-unoriginal-sheep-img.png',
@@ -587,8 +579,18 @@ function buildThread() {
       })
     }
 
+    ${tweet('postman',
+      '1h', 
+      ['2', '2K', '2K', '4K'],
+      {media: [{
+        type: 'image', 
+        src: './postman-why-you-yappin-img.png'}]
+      })
+    }
+
     ${tweet('marcuse', 
-      '55m', `and before you dumbasses say "but Herb, the discourse IS worthwhile" - no. no the f*ck it isn't. That's exactly what tech WANTS y'all to think. This sh*t we do gives us the feeling of resistance while delivering us unapologetically, pacified, back to a system that feeds us false needs. this aint true dopaminemaxxing dawg. U not different bro, ur so far in the prison that u can't even imagine being free anymore bc the algorithm made it look like prison eats. It's so cooked. Ur all so cooked.`,
+      '55m', `and before you dumbasses say “but Herb, the discourse IS worthwhile" - no. no the f*ck it isn’t. That’s exactly what tech WANTS y’all to think. <strong>This sh*t we do gives us the feeling of resistance while delivering us unapologetically, pacified, back to a system that feeds us false needs.</strong> this aint true dopaminemaxxing dawg. 
+      \nU not different bro, yall so far in the prison that u can’t even imagine being free anymore bc the algorithm made it look like prison eats. It’s so cooked. Ur all so cooked.`,
       ['2.3K', '18.4K', '89.0K', '410K'])
     }
 
@@ -600,13 +602,14 @@ function buildThread() {
 
     ${tweet('heidegger', 
       '45m', 
-      'broski. forget abt that system nonsense. let\'s all go to the museum and look at the art. Art. ART. MONA LISA. PICASSO. UM. OTHER ARTISTS. THEY\'LL SAVE US ALL IF WE LOOK LONG ENOUGH OUR SALVATION IS HIDDEN EVERYWHERE WE\'RE JUST NOT LOOKING AROUND', 
+      `broski. forget abt that system nonsense. let’s all go to the museum and look at the art. Art. ART. MONA LISA. PICASSO. UM. OTHER ARTISTS. THEY’LL SAVE US ALL IF WE LOOK LONG ENOUGH OUR SALVATION IS HIDDEN EVERYWHERE WE’RE JUST NOT LOOKING AROUND`,
       ['2.1K', '7.8K', '33K', '150K'])
     }
 
     ${tweet('marcuse', 
       '40m', 
-      `BRO U DA REAL ART. WHERE WERE U ALL MY LIFE THATS WHAT IVE BEEN TRYNA SAY FOR YEARS. LET'S ALL GO TO THE MUSEUM AND RECLAIM OUR INTERIOR LIVES AND KICK ALL THE INTROJECTION THAT AROSE WITHIN US FROM THIS CAPITALIST SOCIETY OUT OF OUR SYSTEM AND RECLAIM OUR SECOND DIMENSION RAHHHHHH\n\nART IS TECHNE AND TECHNOLOGY SHOULD BE A PAINTBRUSH--THE WORLD OUR ART PIECE. @heidegerrrrr will u be the eros to my thanatos 🥺👉👈`, 
+      `BRO U DA REAL ART. WHERE WERE U ALL MY LIFE THATS WHAT IVE BEEN TRYNA SAY FOR YEARS. LET’S ALL GO TO THE MUSEUM AND RECLAIM OUR INTERIOR LIVES AND KICK ALL THE INTROJECTION THAT AROSE WITHIN US FROM THIS CAPITALIST SOCIETY OUT OF OUR SYSTEM AND RECLAIM OUR SECOND DIMENSION RAHHHHHH
+      \n<strong>ART IS TECHNE AND TECHNOLOGY SHOULD BE A PAINTBRUSH--THE WORLD OUR ART PIECE.</strong> @heidegerrrr will u be the eros to my thanatos 🥺👉👈`,
       ['3.1K', '14.2K', '55K', '220K'])
     }
 
@@ -621,14 +624,17 @@ function buildThread() {
     }
 
     ${tweet('rousseau', 
-      '30m', 
-      'what is bro saying 🙏🙏🙏', 
-      ['8.8K', '33.0K', '120K', '500K'])
+      '30m',
+      ['8.8K', '33.0K', '120K', '500K'],
+      {media: [{
+        type: 'image', 
+        src: '.rousseau-how-bro-felt-after-saying-that-img.png'}]
+      })
     }
 
     ${tweet('kant', 
       '25m', 
-      "y'all r talking all this smack abt technology but yall cant do anything abt it 🙄 so stop being haters and accept the fact that…Read more… #engagement", 
+      `y’all r talking all this smack abt technology but yall cant do anything abt it 🙄 so stop being haters and accept the fact that... Read more...`, 
       ['847', '2.1K', '14.2K', '89K'])
     }
 
@@ -641,7 +647,7 @@ function buildThread() {
 
     ${tweet('postman', 
       '20m', 
-      "w-wait. Kant. m-maybe u have a point. We can't just be black and white guys. *looks around at everyone* In my book Technopoly (1992), I say that we can't be like Theuth. But we can't be like Thamus either. We gotta be Theumas. Thomas. Theodore. Idk who these ppl r but yall get the point. And if you dont, check out my book Technopoly (1992), now on SALEEEEEE", 
+      `w-wait. Kant. m-maybe u have a point. We can’t just be black and white guys. *looks around at everyone* In my book Technopoly (1992), I say that we can’t be like Theuth. But we can’t be like Thamus either. We gotta be Theumas. Check out my book Technopoly (1992), now on SALEEEEEE`,
       ['1.1K', '5.4K', '28K', '110K'])
     }
 
@@ -653,7 +659,7 @@ function buildThread() {
 
     ${tweet('marx', 
       '10m', 
-      "ok but i lowkenuinely think yall have a point. I think technology could save us IFFFFFFF C*PITALISM DIDN'T EXIST. what do yall think abt perchance dismantling the material base to fix our superstructure uwu VIVA LA REVOLUTION", 
+      `ok but i lowkenuinely think yall have a point. I think technology could save us IFFFFFFF C*PITALISM DIDN’T EXIST. what do yall think abt <strong>perchance dismantling the material base to fix our superstructure</strong> uwu`,
       ['6.6K', '28.1K', '110K', '450K'],
       {media: [{
         type: 'image', 
@@ -663,7 +669,7 @@ function buildThread() {
 
     ${tweet('rousseau', 
       '5m', 
-      "fack allat let's return to monke 🐒", 
+      `fack allat let's return to monke 🐒`, 
       ['44.0K', '188K', '820K', '3.1M'], 
       { replyTo: 'marx' },
       {media: [{
@@ -673,9 +679,16 @@ function buildThread() {
     }
 
     ${tweet('kant', 
-      '2m', 
-      "So… to answer the question? Read more… <a>#engagement</a>", 
+      '5m', 
+      `<strong>So… to answer the question?</strong> Read more… <a>#engagement</a>`, 
       ['14.0K', '2K', '1K', '1M'], 
+      { replyTo: 'kant' })
+    }
+
+    ${tweet('marx', 
+      '4m', 
+      `bros saying all this on his iphone 16 pro max 512 gb 6.9-inch Super Retina XDR display im crine TT (qt Kant)`, 
+      ['15.0K', '3K', '6K', '640K'], 
       { replyTo: 'kant' })
     }
             
@@ -683,12 +696,13 @@ function buildThread() {
       '4m',
       "blocked.",
       ['8.1K', '22K', '180K', '740K'],
-      { replyTo: 'kant' })
+      { replyTo: 'marx' })
     }
 
     ${tweet('postman',
       '4m',
-      `kant you trust data over judgment, yo. We have moved from using tools to letting tools revise us. You think you're "reasoning", but you're just processing fragments. In a technopoly, culture doesn't use tech; TECH REPLACES CULTURE. So basically you're not "free", you're just highly engaged\n\n<a>#Technopoly</a> <a>#1992</a> <a>#ThamusWon</a> <a>#readmybook</a>`,
+      `people now trust data over judgment, yo. <strong>We have moved from using tools to letting tools revise us.</strong> You think you're “reasoning”, but you're just processing fragments. In a technopoly, culture doesn't use tech; 
+      \n<strong>TECH REPLACES CULTURE. So basically you're not “free,” youre just highly engaged</strong>`,
       ['1.4K', '6.6K', '29K', '115K'],
       {media: [{
         type: 'image',
@@ -706,13 +720,14 @@ function buildThread() {
 
     ${tweet('marcuse',
       '2m',
-      `"free thinkers" when the algorithm feeds them false needs. u think ur resisting but ur just pacified. the "freedom" to choose between brands isn't freedom. it's cooked. WE are cooked.`,
+      `"free thinkers" when the algorithm feeds them false needs. u think ur resisting but ur just pacified. <strong>the "freedom" to choose between brands isn't freedom</strong>. it's cooked. WE are cooked.`,
       ['4.1K', '15.2K', '72K', '300K'])
     }
 
     ${tweet('marx',
       '1m',
-      `if yall locked in and commit to using our technology to unlock a different system maybe we wouldnt be posting on X about technological freedom and more about using these neutral tools to free our subordinate labors towards capitalism &gt;_&lt; our tech is a vital instrument for a collaborative revolution…. No longer will we be just oomfs… we will be neighbors… (aka moots)`,
+      `if yall locked in and commit to using our technology to unlock a different system maybe we wouldnt be posting on X about technological freedom and more about <strong>using these neutral tools to free our subordinate labors towards capitalism</strong> >_< 
+      \nour tech is a vital instrument for a collaborative revolution…. No longer will we be just oomfs… we will be neighbors… (aka moots) `,
       ['5.5K', '20.1K', '95K', '390K'])
     }
 
@@ -724,103 +739,15 @@ function buildThread() {
     }`;
 }
 
-function buildProfile(key) {
-  const p = PHI[key];
-  const profileTweets = {
-    kant: [
-      { time: '4h', text: 'Are we truly free in our relationship to technology, or have we become mere instruments of the instruments we created? The categorical imperative demands we ask: could we universalize a maxim of unconditional technological dependence?\n\nI think not. 🧵', stats: ['847', '2.1K', '14.2K', '89K'], onclick: "showPage('thread')" },
-      { time: '1d', text: 'Hot take: the maxim "i\'ll do what i want" is categorically self-defeating because if everyone did what they wanted with no rational principle, the concept of "wanting" would collapse entirely. this is first year deontology. get it together.', stats: ['2.1K', '7.8K', '33K', '150K'] }
-    ],
-    rousseau: [
-      { time: '3h', text: "kant babe but you're asking the wrong question. it's not about WHETHER we can be free within technological society — it's that technological society itself is the cage. the sciences and arts didn't liberate us. they corrupted us 🌿", stats: ['203', '1.4K', '9.1K', '44K'], onclick: "showPage('thread')" },
-      { time: '6h', text: "science be tellin us progress is good. but nobody's happier. nobody's kinder. MAKE IT MAKE SENSE. yall still not getting it 😔", stats: ['312', '891', '5.5K', '22K'] }
-    ],
-    marx: [
-      { time: '2h', text: "okay both of you but you're both doing idealism and i can't 💀\n\nthe question isn't whether technology COULD be a tool of freedom in the abstract. the question is: who OWNS the technology? freedom is a material question bestie ✊", stats: ['891', '6.7K', '31.0K', '142K'], onclick: "showPage('thread')" },
-      { time: '8h', text: 'OpenAI valued at $300B while the people who actually trained the models get stock options that vest in 4 years. the bourgeoisie understood the assignment and yall are out here saying "at least i get free ChatGPT" 💀 this is literally surplus value extraction on a cosmic scale', stats: ['4.2K', '8.8K', '40K', '180K'] }
-    ]
-  };
+// construct page
 
-  const tweetsHTML = (profileTweets[key] || []).map(t =>
-    tweet(key, t.time, t.text, t.stats, { onclick: t.onclick ?? '' })
-  ).join('');
-
-  return `
-    <div class="feed-header">
-      <div class="feed-header-inner">
-        <div class="back-btn" onclick="showPage('home')">${IC.back}</div>
-        <div><h2>${p.name}</h2><div style="font-size:13px;color:var(--muted);">${p.postCount ?? ''} posts</div></div>
-      </div>
-    </div>
-    <div class="profile-banner ${p.banner}">${p.img ? '' : p.emoji}</div>
-    <div class="profile-meta">
-      ${p.isMe ? '<button class="edit-profile-btn">Edit profile</button>' : '<button class="edit-profile-btn" style="border-color:var(--border);">Follow</button>'}
-      <div class="profile-avi-wrap">
-        <div class="profile-av ${p.color}">
-          ${p.img ? `<img src="${p.img}" alt="${p.name}" onerror="this.style.display='none';this.parentElement.textContent='${p.emoji}'">` : p.emoji}
-        </div>
-      </div>
-      <div class="profile-name">${p.name} <span class="verified ${p.color}-v" style="vertical-align:middle;">${IC.verified}</span></div>
-      <div class="profile-handle">${p.handle}</div>
-      ${p.bio ? `<div class="profile-bio">${p.bio}</div>` : ''}
-      ${p.location ? `<div class="profile-meta-row"><span>${p.location}</span>${p.link ? `<span>${p.link}</span>` : ''}${p.joined ? `<span>${p.joined}</span>` : ''}</div>` : ''}
-      ${p.followers ? `<div class="profile-stats"><a><strong>${p.following}</strong> <span>Following</span></a><a><strong>${p.followers}</strong> <span>Followers</span></a></div>` : ''}
-    </div>
-    <div class="profile-tabs">
-      <div class="profile-tab active">Posts</div>
-      <div class="profile-tab">Replies</div>
-      <div class="profile-tab">Media</div>
-      <div class="profile-tab">Likes</div>
-    </div>
-    ${tweetsHTML}`;
-}
-
-// ─── SIDEBAR WHO TO FOLLOW ────────────────────────────────────────────────────
-
-function buildWhoItem(key) {
-  const p = PHI[key];
-  const inner = p.img
-    ? `<img src="${p.img}" alt="${p.name}" onerror="this.style.display='none';this.parentElement.textContent='${p.emoji}'">`
-    : p.emoji;
-  return `
-    <div class="av sm ${p.color}">${inner}</div>
-    <div class="who-info"><div class="name">${p.name}</div><div class="handle">${p.handle}</div></div>
-    <button class="follow-btn" onclick="this.textContent=this.textContent==='Follow'?'Following':'Follow'">Follow</button>`;
-}
-
-// ─── NAV PROFILE ─────────────────────────────────────────────────────────────
-
-function buildNavProfile() {
-  const p = PHI.kant;
-  const inner = p.img
-    ? `<img src="${p.img}" alt="${p.name}" onerror="this.style.display='none';this.parentElement.textContent='${p.emoji}'">`
-    : p.emoji;
-  return `
-    <div class="av kant" style="width:40px;height:40px;">${inner}</div>
-    <div class="nav-profile-info">
-      <div class="name">${p.name}</div>
-      <div class="handle">${p.handle}</div>
-    </div>`;
-}
-
-// ─── ROUTING ─────────────────────────────────────────────────────────────────
+document.getElementById('page-thread').innerHTML = buildThread();
 
 function showPage(name) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   const el = document.getElementById('page-' + name);
   if (el) { el.classList.add('active'); window.scrollTo(0, 0); }
 }
-
-// ─── INIT ─────────────────────────────────────────────────────────────────────
-
-document.getElementById('page-home').innerHTML = buildHome();
-document.getElementById('page-thread').innerHTML = buildThread();
-document.getElementById('page-profile-kant').innerHTML = buildProfile('kant');
-document.getElementById('page-profile-rousseau').innerHTML = buildProfile('rousseau');
-document.getElementById('page-profile-marx').innerHTML = buildProfile('marx');
-document.getElementById('who-rousseau').innerHTML = buildWhoItem('rousseau');
-document.getElementById('who-marx').innerHTML = buildWhoItem('marx');
-document.getElementById('nav-profile-kant').innerHTML = buildNavProfile();
 </script>
 </body>
 </html>
