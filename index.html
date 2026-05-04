@@ -616,8 +616,8 @@ function buildThread() {
     ${tweet('heidegger', 
       '35m', 'will i be ur eros? First i must question what love is in order to have a free relationship to it. What is love? Baby dont hurt me', 
       ['5.5K', '22.1K', '91K', '380K'], 
-      { replyTo: 'marcuse' },
-      {media: [{
+      { replyTo: 'marcuse',
+      media: [{
         type: 'image', 
         src: './heidegger-baby-dont-hurt-me-img.png'}]
       })
@@ -634,7 +634,7 @@ function buildThread() {
 
     ${tweet('kant', 
       '25m', 
-      `y’all r talking all this smack abt technology but yall cant do anything abt it 🙄 so stop being haters and accept the fact that... Read more...`, 
+      `y’all r talking all this smack abt technology but yall cant do anything abt it 🙄 stop being haters`, 
       ['847', '2.1K', '14.2K', '89K'])
     }
 
@@ -648,13 +648,11 @@ function buildThread() {
     ${tweet('postman', 
       '20m', 
       `w-wait. Kant. m-maybe u have a point. We can’t just be black and white guys. *looks around at everyone* In my book Technopoly (1992), I say that we can’t be like Theuth. But we can’t be like Thamus either. We gotta be Theumas. Check out my book Technopoly (1992), now on SALEEEEEE`,
-      ['1.1K', '5.4K', '28K', '110K'])
-    }
-
-    ${tweet('marcuse', 
-      '15m', 
-      `When in a few years you philosophers are forced to mine bitcoin for Grok and Elon I'm blaming it on this X thread alone. Focus your clicks on saving the turts instead <a href="https://saveturtles.org/" target="_blank">saveturtles.org</a>`, 
-      ['3.3K', '12.4K', '59K', '240K'])
+      ['1.1K', '5.4K', '28K', '110K']
+      {media: [{
+        type: 'video', 
+        src: './postman-technopoly-edit.mov'}]
+      })
     }
 
     ${tweet('marx', 
@@ -671,8 +669,8 @@ function buildThread() {
       '5m', 
       `fack allat let's return to monke 🐒`, 
       ['44.0K', '188K', '820K', '3.1M'], 
-      { replyTo: 'marx' },
-      {media: [{
+      { replyTo: 'marx',
+      media: [{
         type: 'image', 
         src: './rousseau-return-to-monke-img.png'}]
       })
@@ -729,13 +727,6 @@ function buildThread() {
       `if yall locked in and commit to using our technology to unlock a different system maybe we wouldnt be posting on X about technological freedom and more about <strong>using these neutral tools to free our subordinate labors towards capitalism</strong> >_< 
       \nour tech is a vital instrument for a collaborative revolution…. No longer will we be just oomfs… we will be neighbors… (aka moots) `,
       ['5.5K', '20.1K', '95K', '390K'])
-    }
-
-    ${tweet('marx', 
-      '6m', 
-      "bros saying all this on his iphone 16 pro max 512 gb 6.9-inch Super Retina XDR display im crine TT", 
-      ['34.0K', '12K', '90K', '1.2M'], 
-      { replyTo: 'kant' })
     }`;
 }
 
