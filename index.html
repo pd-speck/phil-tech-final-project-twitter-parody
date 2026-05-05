@@ -1,3 +1,4 @@
+<!-- adapted from vscode html template -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,6 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
+  /* styles from copilot suggestion, TODO Edit */
   :root {
     --bg: #ffffff;
     --surface: #f7f9f9;
@@ -31,16 +33,16 @@
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { background: var(--bg); color: var(--text); font-family: 'DM Sans', sans-serif; min-height: 100vh; }
 
-  /* LAYOUT */
+  /* centering fix - https://stackoverflow.com/questions/2005954 */
   .app { display: flex; justify-content: center; max-width: 1265px; margin: 0 auto; }
   .left-nav { width: var(--nav-w); padding: 0 12px; position: sticky; top: 0; height: 100vh; display: flex; flex-direction: column; border-right: 1px solid var(--border); }
   .feed { width: 600px; border-right: 1px solid var(--border); min-height: 100vh; }
   .right-sidebar { width: var(--sidebar-w); padding: 0 16px; position: sticky; top: 0; height: 100vh; overflow-y: auto; }
 
-  /* LEFT NAV */
+  /*auto gen by VS*/
   .nav-logo { padding: 12px 16px; margin-bottom: 4px; cursor: pointer; }
-  .nav-logo svg { width: 30px; height: 30px; fill: var(--text); }
-  .nav-item { display: flex; align-items: center; gap: 20px; padding: 12px 16px; border-radius: 9999px; cursor: pointer; font-size: 20px; transition: background 0.15s; margin-bottom: 2px; }
+    .nav-logo svg { width: 30px; height: 30px; fill: var(--text); }
+  .nav-item { display: flex; align-items: center; gap: 20px; padding: 12px 16px; border-radius: 9999px; cursor: pointer; font-size: 20px; transition: background 0.15s; margin: 0; margin-bottom: 2px; }
   .nav-item:hover { background: rgba(0,0,0,0.07); }
   .nav-item svg { width: 26px; height: 26px; fill: var(--text); }
   .nav-item span { font-size: 19px; }
@@ -277,21 +279,16 @@
 </div>
 
 <script>
-// thread
 
+
+// copilot and claude suggested structure <-- X rewrote tweet structure, func. based + argument pass through
+// main thread built. no profiles, just thread tweets
 const PHI = {
   kant: {
     name: 'Immanuel Kant',
     handle: '@kantegorical_imperativ',
     img: './kant-pfp.png',
     color: 'kant',
-    postCount: '3,241',
-    following: '312',
-    followers: '4.2M',
-    location: '📍 Königsberg, Prussia',
-    link: '🔗 critique-of-pure-reason.substack.com',
-    joined: '📅 Joined April 1724',
-    bio: '⚖️ philosopher · deontologist · categorical absolutist<br>your vibe is either universalizable or it isn\'t. no cap.<br>pure reason posted daily · königsberg native (never left, didn\'t need to)<br>autonomy &gt; everything · treating people as ends since 1724',
     banner: 'kant-banner',
     isMe: true
   },
@@ -300,13 +297,6 @@ const PHI = {
     handle: '@the_real_rousseau',
     img: './rousseau-pfp.png',
     color: 'rousseau',
-    postCount: '12',
-    following: '0',
-    followers: '4.7M',
-    location: '📍 the forest (gone to touch grass, back never)',
-    link: '🔗 social-contract.substack.com',
-    joined: '📅 Joined June 1712',
-    bio: '🌿 philosopher · contrarian · off-grid enthusiast<br>science and the arts corrupted us. i said what i said 🙂‍↔️<br>ur iphone is making you morally broke, not just broke broke<br>general will &gt; individual rizz every time 💚',
     banner: 'rousseau-banner'
   },
   marx: {
@@ -314,13 +304,6 @@ const PHI = {
     handle: '@das_kapital',
     img: 'marx-pfp.png',
     color: 'marx',
-    postCount: '848',
-    following: '3',
-    followers: '2.1M',
-    location: '📍 haunting europe (as per)',
-    link: '🔗 das-kapital.substack.com',
-    joined: '📅 Joined May 1818',
-    bio: '☭ philosopher · economist · main character of history<br>ur fav CEO\'s worst nightmare 💀<br>AI is just alienated labor with a prettier UI bestie<br>engels is my forever person 🤝 | no cap, stateless society or bust',
     banner: 'marx-banner'
   },
   heidegger: {
@@ -345,6 +328,7 @@ const PHI = {
     banner: 'marcuse-banner'
   }
 };
+console.log("test")
 
 // ─── ICONS ───────────────────────────────────────────────────────────────────
 
@@ -432,8 +416,9 @@ function tweet(key, time, text, stats, opts = {}) {
   </div>`;
 }
 
-// Main Thread
+// Thread
 
+// TODO: fix colors for dark mode maybe idk
 function highlight(key, text) {
   const colors = {
     kant:      '#ede4f5',
@@ -449,7 +434,13 @@ function highlight(key, text) {
   );
 }
 
+function initHomePage() {
+  // TODO: build this out later
+  return
+}
+
 function buildThread() {
+  console.log(PHI.rousseau)
   return `
     <div class="feed-header">
       <div class="feed-header-inner">
